@@ -87,19 +87,6 @@
             this.cmbTablas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTablas.FormattingEnabled = true;
             this.cmbTablas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmbTablas.Items.AddRange(new object[] {
-            "Selección",
-            "Proyección generalizada",
-            "Unión",
-            "Diferencia de conjuntos",
-            "Producto cartesiano",
-            "Intersección",
-            "División",
-            "Renombrar relación y atributos",
-            "Concatenación (join)",
-            "Concatenación natural",
-            "Agregación",
-            "Agrupación"});
             this.cmbTablas.Location = new System.Drawing.Point(362, 30);
             this.cmbTablas.Name = "cmbTablas";
             this.cmbTablas.Size = new System.Drawing.Size(184, 21);

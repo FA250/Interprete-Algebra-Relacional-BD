@@ -10,3 +10,15 @@ C:\Fabian\2017\Segundo Semestre\BD\Visual\InterpreteAlgebraRelacionalSQL\Interpr
 C:\Fabian\2017\Segundo Semestre\BD\Visual\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmConsultas.resources
 C:\Fabian\2017\Segundo Semestre\BD\Visual\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmTablaResultado.resources
 C:\Fabian\2017\Segundo Semestre\BD\Visual\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmMostrarTablas.resources
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\bin\Debug\InterpreteAlgebraRelacionalSQL.exe.config
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.exe
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.pdb
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\bin\Debug\InterpreteAlgebraRelacionalSQL.exe
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\bin\Debug\InterpreteAlgebraRelacionalSQL.pdb
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.csprojResolveAssemblyReference.cache
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmConsultas.resources
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmIngreso.resources
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmMostrarTablas.resources
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.Properties.Resources.resources
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmTablaResultado.resources
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.csproj.GenerateResource.Cache
