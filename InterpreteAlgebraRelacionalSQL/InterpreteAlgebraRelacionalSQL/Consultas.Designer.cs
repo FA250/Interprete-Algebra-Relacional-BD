@@ -42,6 +42,15 @@
             this.btnReferenciaCruzada = new System.Windows.Forms.Button();
             this.btnAcercaDe = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
+            this.lblTabla = new System.Windows.Forms.Label();
+            this.txtTabla = new System.Windows.Forms.TextBox();
+            this.lblPredicado = new System.Windows.Forms.Label();
+            this.txtPredicado = new System.Windows.Forms.TextBox();
+            this.lblTabla2 = new System.Windows.Forms.Label();
+            this.txtTabla2 = new System.Windows.Forms.TextBox();
+            this.lblOpAgregacion = new System.Windows.Forms.Label();
+            this.lblAgrupaciones = new System.Windows.Forms.Label();
+            this.txtAgrupaciones = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnSalir
@@ -71,7 +80,7 @@
             // 
             // txtBDNueva
             // 
-            this.txtBDNueva.Location = new System.Drawing.Point(139, 68);
+            this.txtBDNueva.Location = new System.Drawing.Point(139, 66);
             this.txtBDNueva.Name = "txtBDNueva";
             this.txtBDNueva.Size = new System.Drawing.Size(142, 20);
             this.txtBDNueva.TabIndex = 5;
@@ -81,7 +90,7 @@
             this.btnActualizarBD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
             this.btnActualizarBD.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnActualizarBD.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizarBD.Location = new System.Drawing.Point(287, 62);
+            this.btnActualizarBD.Location = new System.Drawing.Point(287, 61);
             this.btnActualizarBD.Name = "btnActualizarBD";
             this.btnActualizarBD.Size = new System.Drawing.Size(91, 32);
             this.btnActualizarBD.TabIndex = 6;
@@ -141,19 +150,20 @@
             "Concatenación natural",
             "Agregación",
             "Agrupación"});
-            this.cmbOperacion.Location = new System.Drawing.Point(515, 73);
+            this.cmbOperacion.Location = new System.Drawing.Point(515, 71);
             this.cmbOperacion.Name = "cmbOperacion";
             this.cmbOperacion.Size = new System.Drawing.Size(184, 21);
             this.cmbOperacion.TabIndex = 7;
+            this.cmbOperacion.SelectedIndexChanged += new System.EventHandler(this.cmbOperacion_SelectedIndexChanged);
             // 
             // btnOperacion
             // 
             this.btnOperacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
             this.btnOperacion.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOperacion.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOperacion.Location = new System.Drawing.Point(682, 542);
+            this.btnOperacion.Location = new System.Drawing.Point(719, 290);
             this.btnOperacion.Name = "btnOperacion";
-            this.btnOperacion.Size = new System.Drawing.Size(177, 38);
+            this.btnOperacion.Size = new System.Drawing.Size(140, 68);
             this.btnOperacion.TabIndex = 8;
             this.btnOperacion.Text = "Realizar operación";
             this.btnOperacion.UseVisualStyleBackColor = false;
@@ -230,21 +240,120 @@
             this.btnAyuda.UseVisualStyleBackColor = false;
             this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
             // 
+            // lblTabla
+            // 
+            this.lblTabla.AutoSize = true;
+            this.lblTabla.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTabla.ForeColor = System.Drawing.Color.White;
+            this.lblTabla.Location = new System.Drawing.Point(12, 154);
+            this.lblTabla.Name = "lblTabla";
+            this.lblTabla.Size = new System.Drawing.Size(62, 26);
+            this.lblTabla.TabIndex = 4;
+            this.lblTabla.Text = "Tabla:";
+            // 
+            // txtTabla
+            // 
+            this.txtTabla.Location = new System.Drawing.Point(139, 158);
+            this.txtTabla.Name = "txtTabla";
+            this.txtTabla.Size = new System.Drawing.Size(189, 20);
+            this.txtTabla.TabIndex = 5;
+            // 
+            // lblPredicado
+            // 
+            this.lblPredicado.AutoSize = true;
+            this.lblPredicado.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPredicado.ForeColor = System.Drawing.Color.White;
+            this.lblPredicado.Location = new System.Drawing.Point(12, 192);
+            this.lblPredicado.Name = "lblPredicado";
+            this.lblPredicado.Size = new System.Drawing.Size(99, 26);
+            this.lblPredicado.TabIndex = 4;
+            this.lblPredicado.Text = "Predicado:";
+            // 
+            // txtPredicado
+            // 
+            this.txtPredicado.Location = new System.Drawing.Point(139, 196);
+            this.txtPredicado.Multiline = true;
+            this.txtPredicado.Name = "txtPredicado";
+            this.txtPredicado.Size = new System.Drawing.Size(546, 73);
+            this.txtPredicado.TabIndex = 5;
+            // 
+            // lblTabla2
+            // 
+            this.lblTabla2.AutoSize = true;
+            this.lblTabla2.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTabla2.ForeColor = System.Drawing.Color.White;
+            this.lblTabla2.Location = new System.Drawing.Point(369, 154);
+            this.lblTabla2.Name = "lblTabla2";
+            this.lblTabla2.Size = new System.Drawing.Size(77, 26);
+            this.lblTabla2.TabIndex = 4;
+            this.lblTabla2.Text = "Tabla 2:";
+            this.lblTabla2.Visible = false;
+            // 
+            // txtTabla2
+            // 
+            this.txtTabla2.Location = new System.Drawing.Point(496, 158);
+            this.txtTabla2.Name = "txtTabla2";
+            this.txtTabla2.Size = new System.Drawing.Size(189, 20);
+            this.txtTabla2.TabIndex = 5;
+            this.txtTabla2.Visible = false;
+            // 
+            // lblOpAgregacion
+            // 
+            this.lblOpAgregacion.AutoSize = true;
+            this.lblOpAgregacion.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOpAgregacion.ForeColor = System.Drawing.Color.White;
+            this.lblOpAgregacion.Location = new System.Drawing.Point(7, 190);
+            this.lblOpAgregacion.Name = "lblOpAgregacion";
+            this.lblOpAgregacion.Size = new System.Drawing.Size(135, 26);
+            this.lblOpAgregacion.TabIndex = 10;
+            this.lblOpAgregacion.Text = "Op agregación:";
+            this.lblOpAgregacion.Visible = false;
+            // 
+            // lblAgrupaciones
+            // 
+            this.lblAgrupaciones.AutoSize = true;
+            this.lblAgrupaciones.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAgrupaciones.ForeColor = System.Drawing.Color.White;
+            this.lblAgrupaciones.Location = new System.Drawing.Point(7, 279);
+            this.lblAgrupaciones.Name = "lblAgrupaciones";
+            this.lblAgrupaciones.Size = new System.Drawing.Size(131, 26);
+            this.lblAgrupaciones.TabIndex = 10;
+            this.lblAgrupaciones.Text = "Agrupaciones:";
+            this.lblAgrupaciones.Visible = false;
+            // 
+            // txtAgrupaciones
+            // 
+            this.txtAgrupaciones.Location = new System.Drawing.Point(139, 285);
+            this.txtAgrupaciones.Multiline = true;
+            this.txtAgrupaciones.Name = "txtAgrupaciones";
+            this.txtAgrupaciones.Size = new System.Drawing.Size(546, 73);
+            this.txtAgrupaciones.TabIndex = 5;
+            this.txtAgrupaciones.Visible = false;
+            // 
             // frmConsultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(82)))), ((int)(((byte)(151)))));
-            this.ClientSize = new System.Drawing.Size(871, 592);
+            this.ClientSize = new System.Drawing.Size(871, 390);
+            this.Controls.Add(this.txtAgrupaciones);
+            this.Controls.Add(this.lblAgrupaciones);
+            this.Controls.Add(this.txtPredicado);
+            this.Controls.Add(this.lblOpAgregacion);
             this.Controls.Add(this.btnReferenciaCruzada);
             this.Controls.Add(this.btnTablasTemporales);
             this.Controls.Add(this.btnVerTablas);
             this.Controls.Add(this.btnOperacion);
             this.Controls.Add(this.cmbOperacion);
             this.Controls.Add(this.btnActualizarBD);
+            this.Controls.Add(this.txtTabla2);
+            this.Controls.Add(this.txtTabla);
             this.Controls.Add(this.txtBDNueva);
             this.Controls.Add(this.lblBDActual);
+            this.Controls.Add(this.lblPredicado);
+            this.Controls.Add(this.lblTabla2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTabla);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnAcercaDe);
@@ -252,7 +361,7 @@
             this.Controls.Add(this.btnSalir);
             this.Name = "frmConsultas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
+            this.Text = " Consultas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmConsultas_FormClosing);
             this.Load += new System.EventHandler(this.frmConsultas_Load);
             this.ResumeLayout(false);
@@ -276,5 +385,14 @@
         private System.Windows.Forms.Button btnVerTablas;
         private System.Windows.Forms.Button btnTablasTemporales;
         private System.Windows.Forms.Button btnReferenciaCruzada;
+        private System.Windows.Forms.Label lblTabla;
+        private System.Windows.Forms.TextBox txtTabla;
+        private System.Windows.Forms.Label lblPredicado;
+        private System.Windows.Forms.TextBox txtPredicado;
+        private System.Windows.Forms.Label lblTabla2;
+        private System.Windows.Forms.TextBox txtTabla2;
+        private System.Windows.Forms.Label lblOpAgregacion;
+        private System.Windows.Forms.Label lblAgrupaciones;
+        private System.Windows.Forms.TextBox txtAgrupaciones;
     }
 }

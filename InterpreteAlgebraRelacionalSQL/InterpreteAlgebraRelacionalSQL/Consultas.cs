@@ -154,6 +154,61 @@ namespace InterpreteAlgebraRelacionalSQL
             }
         }
 
+        private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Dependiendo de la operacion elegida oculta o muestra los objetos necesarios para realizar la operacion
+            if (cmbOperacion.SelectedIndex == 0 || cmbOperacion.SelectedIndex == 1 || cmbOperacion.SelectedIndex == 7)
+            {
+                lblTabla2.Visible = false;
+                txtTabla2.Visible = false;                
+                lblPredicado.Visible = true;
+                txtPredicado.Visible = true;
+                lblAgrupaciones.Visible = false;
+                lblOpAgregacion.Visible = false;
+                txtAgrupaciones.Visible = false;
+            }
+            else if (cmbOperacion.SelectedIndex == 2 || cmbOperacion.SelectedIndex == 3 || cmbOperacion.SelectedIndex == 4 || cmbOperacion.SelectedIndex == 5 || cmbOperacion.SelectedIndex == 6 || cmbOperacion.SelectedIndex == 9)
+            {
+                lblTabla2.Visible = true;
+                txtTabla2.Visible = true;
+                lblPredicado.Visible = true;
+                txtPredicado.Visible = true;
+                lblAgrupaciones.Visible = false;
+                lblOpAgregacion.Visible = false;
+                txtAgrupaciones.Visible = false;
+            }
+            else if (cmbOperacion.SelectedIndex == 8)
+            {
+                lblTabla2.Visible = true;
+                txtTabla2.Visible = true;
+                lblPredicado.Visible = true;
+                txtPredicado.Visible = true;
+                lblAgrupaciones.Visible = false;
+                lblOpAgregacion.Visible = false;
+                txtAgrupaciones.Visible = false;
+            }
+            else if (cmbOperacion.SelectedIndex == 10)
+            {
+                lblTabla2.Visible = false;
+                txtTabla2.Visible = false;
+                lblPredicado.Visible = false;
+                lblOpAgregacion.Visible = true;
+                lblAgrupaciones.Visible = false;
+                txtPredicado.Visible = true;
+                txtAgrupaciones.Visible = false;
+            }
+            else
+            {
+                lblTabla2.Visible = false;
+                txtTabla2.Visible = false;
+                lblPredicado.Visible = false;
+                lblOpAgregacion.Visible = true;
+                lblAgrupaciones.Visible = true;
+                txtPredicado.Visible = true;
+                txtAgrupaciones.Visible = true;
+            }
+        }
+
 
     }
 }
