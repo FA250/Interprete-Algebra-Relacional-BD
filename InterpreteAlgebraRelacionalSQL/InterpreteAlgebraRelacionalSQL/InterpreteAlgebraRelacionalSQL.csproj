@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BD\ClaseMD.cs" />
+    <Compile Include="BD\ClaseConexion.cs" />
     <Compile Include="Consultas.cs">
       <SubType>Form</SubType>
     </Compile>

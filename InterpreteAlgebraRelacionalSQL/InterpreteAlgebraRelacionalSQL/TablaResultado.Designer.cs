@@ -30,9 +30,6 @@
         {
             this.dgvResultado = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.Atributo1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Atributo2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Atributo3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,10 +38,6 @@
             this.dgvResultado.AllowUserToAddRows = false;
             this.dgvResultado.AllowUserToDeleteRows = false;
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Atributo1,
-            this.Atributo2,
-            this.Atributo3});
             this.dgvResultado.Location = new System.Drawing.Point(12, 71);
             this.dgvResultado.Name = "dgvResultado";
             this.dgvResultado.ReadOnly = true;
@@ -62,24 +55,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Tabla resultante";
             // 
-            // Atributo1
-            // 
-            this.Atributo1.HeaderText = "Atributo1";
-            this.Atributo1.Name = "Atributo1";
-            this.Atributo1.ReadOnly = true;
-            // 
-            // Atributo2
-            // 
-            this.Atributo2.HeaderText = "Atributo2";
-            this.Atributo2.Name = "Atributo2";
-            this.Atributo2.ReadOnly = true;
-            // 
-            // Atributo3
-            // 
-            this.Atributo3.HeaderText = "Atributo3";
-            this.Atributo3.Name = "Atributo3";
-            this.Atributo3.ReadOnly = true;
-            // 
             // frmTablaResultado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -91,6 +66,7 @@
             this.Name = "frmTablaResultado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TablaResultado";
+            this.Load += new System.EventHandler(this.frmTablaResultado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -101,8 +77,5 @@
 
         private System.Windows.Forms.DataGridView dgvResultado;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Atributo1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Atributo2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Atributo3;
     }
 }

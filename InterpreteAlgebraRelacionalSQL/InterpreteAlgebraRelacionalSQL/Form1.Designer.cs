@@ -33,6 +33,8 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnIngreso = new System.Windows.Forms.Button();
+            this.txtBDNueva = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtUsuario
@@ -59,7 +61,7 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSalir.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.Color.Red;
-            this.btnSalir.Location = new System.Drawing.Point(60, 163);
+            this.btnSalir.Location = new System.Drawing.Point(60, 210);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(108, 38);
             this.btnSalir.TabIndex = 2;
@@ -83,7 +85,7 @@
             this.btnIngreso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
             this.btnIngreso.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnIngreso.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngreso.Location = new System.Drawing.Point(195, 163);
+            this.btnIngreso.Location = new System.Drawing.Point(195, 210);
             this.btnIngreso.Name = "btnIngreso";
             this.btnIngreso.Size = new System.Drawing.Size(108, 38);
             this.btnIngreso.TabIndex = 2;
@@ -91,12 +93,32 @@
             this.btnIngreso.UseVisualStyleBackColor = false;
             this.btnIngreso.Click += new System.EventHandler(this.btnIngreso_Click);
             // 
+            // txtBDNueva
+            // 
+            this.txtBDNueva.Location = new System.Drawing.Point(161, 152);
+            this.txtBDNueva.Name = "txtBDNueva";
+            this.txtBDNueva.Size = new System.Drawing.Size(142, 20);
+            this.txtBDNueva.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(34, 148);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(130, 26);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Base de datos:";
+            // 
             // frmIngreso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(82)))), ((int)(((byte)(151)))));
-            this.ClientSize = new System.Drawing.Size(365, 246);
+            this.ClientSize = new System.Drawing.Size(365, 280);
+            this.Controls.Add(this.txtBDNueva);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnIngreso);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.label2);
@@ -118,6 +140,8 @@
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnIngreso;
+        private System.Windows.Forms.TextBox txtBDNueva;
+        private System.Windows.Forms.Label label3;
     }
 }
 

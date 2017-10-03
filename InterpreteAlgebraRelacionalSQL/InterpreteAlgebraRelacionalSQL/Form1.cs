@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InterpreteAlgebraRelacionalSQL.BD;
 
 namespace InterpreteAlgebraRelacionalSQL
 {
     public partial class frmIngreso : Form
     {
         bool Salir = true;
+        String BDActual = "Ninguna";
         public frmIngreso()
         {
             InitializeComponent();
@@ -20,10 +22,75 @@ namespace InterpreteAlgebraRelacionalSQL
 
         private void btnIngreso_Click(object sender, EventArgs e)
         {
-            //Abre la ventana de consultas y esconde la ventana de ingreso
-            Form Consultas = new frmConsultas(this);
-            Consultas.Show();
-            this.Hide();
+            ClaseMD MD = new ClaseMD();
+
+
+            if (BDActual == "Ninguna")
+            {
+                if (txtBDNueva.Text.Trim() == "")
+                {
+                    MessageBox.Show("El nombre de la nueva base de datos no puede esta en blanco", "Error");//Mensaje de error
+                }
+                else
+                {
+                    if (MD.verificar_BD(txtBDNueva.Text) == "existe")
+                    {
+                        //Cambia la base de datos que se esta utilizando
+                        BDActual = txtBDNueva.Text;
+                        txtBDNueva.Text = "";
+
+                        //Abre la ventana de consultas y esconde la ventana de ingreso
+                        Form Consultas = new frmConsultas(this, BDActual);
+                        Consultas.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("La base de datos seleccionada no existe", "Error");//Mensaje de error
+                    }
+                }
+            }
+            else
+            {
+                if (txtBDNueva.Text.Trim() == "")
+                {
+                    //Abre la ventana de consultas y esconde la ventana de ingreso
+                    Form Consultas = new frmConsultas(this, BDActual);
+                    Consultas.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    //Mensaje de aviso preguntando si realmente desea cambiar la base de datos que se esta utilizando actualmente
+                    DialogResult result = MessageBox.Show("Si cambia la base de datos que se esta utilizando se borraran las tablas temporales existentes, ¿Desea continuar?", "Aviso", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {                      
+
+                        if (MD.verificar_BD(txtBDNueva.Text) == "existe")
+                        {
+                            //TODO borrar tablas temporales
+
+                            //Cambia la base de datos que se esta utilizando
+                            BDActual = txtBDNueva.Text;
+                            txtBDNueva.Text = "";
+
+                            //Abre la ventana de consultas y esconde la ventana de ingreso
+                            Form Consultas = new frmConsultas(this, BDActual);
+                            Consultas.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("La base de datos seleccionada no existe", "Error");//Mensaje de error
+                            MessageBox.Show("No se borraron las tablas temporales", "Aviso");//Mensaje de error
+                        }
+                    }
+                }
+
+            }
+
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

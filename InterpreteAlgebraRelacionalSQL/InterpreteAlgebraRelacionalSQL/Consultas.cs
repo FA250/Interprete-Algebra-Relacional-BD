@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InterpreteAlgebraRelacionalSQL.BD;
+using System.Collections;
 
 namespace InterpreteAlgebraRelacionalSQL
 {
@@ -15,17 +17,18 @@ namespace InterpreteAlgebraRelacionalSQL
         bool Salir = false;
         string BDActual;
         Form FormIngreso;
-        public frmConsultas(Form Ingreso)
+        public frmConsultas(Form Ingreso,String BD)
         {
-            BDActual = "";
+            BDActual = BD;
             FormIngreso = Ingreso;
             InitializeComponent();
         }
 
         private void frmConsultas_Load(object sender, EventArgs e)
         {
-            cmbOperacion.SelectedIndex = 0;
 
+            lblBDActual.Text = BDActual;
+            cmbOperacion.SelectedIndex = 0;
         }
 
         private void frmConsultas_FormClosing(object sender, FormClosingEventArgs e)
@@ -57,46 +60,42 @@ namespace InterpreteAlgebraRelacionalSQL
             MessageBox.Show("Se desplegara el manual de usuario", "WIP");//Mensaje que indica al usuario ingresar la placa y verificarlo
         }
 
-        private void btnActualizarBD_Click(object sender, EventArgs e)
-        {
-            if (txtBDNueva.Text.Trim() == "")
-            {
-                MessageBox.Show("El nombre de la nueva base de datos no puede esta en blanco", "Error");//Mensaje que indica al usuario ingresar la placa y verificarlo
-            }
-            else
-            {
-                if (lblBDActual.Text.Trim() == "Ninguna")
-                {
-                    //Cambia la base de datos que se esta utilizando
-                    BDActual = txtBDNueva.Text;
-                    lblBDActual.Text = BDActual;
-                    lblBDActual.ForeColor = System.Drawing.Color.Green;
-                    txtBDNueva.Text = "";
-                }
-                else
-                {
-                    //Mensaje de aviso preguntando si realmente desea cambiar la base de datos que se esta utilizando actualmente
-                    DialogResult result = MessageBox.Show("Si cambia la base de datos que se esta utilizando se borraran las tablas temporales existentes, ¿Desea continuar?", "Aviso", MessageBoxButtons.YesNo);
 
-                    if (result == DialogResult.Yes)
-                    {
-                        //TODO borrar tablas temporales
-
-                        //Cambia la base de datos que se esta utilizando
-                        BDActual = txtBDNueva.Text;
-                        lblBDActual.Text = BDActual;
-                        lblBDActual.ForeColor = System.Drawing.Color.Green;
-                        txtBDNueva.Text = "";
-                    }
-                }
-            }
-        }
 
         private void btnOperacion_Click(object sender, EventArgs e)
         {
-            //Muestra la ventana con la tabla resultante de la operacion
-            Form TablaResultado = new frmTablaResultado();
-            TablaResultado.Show();
+            ClaseMD MD = new ClaseMD();
+            bool mostrarResultado = false;
+            ArrayList columnas=new ArrayList();
+            ArrayList tuplas = new ArrayList();
+            //Seleccion
+            if (cmbOperacion.SelectedIndex == 0)
+            {
+                if (txtTabla.Text.Trim() != "" && txtPredicado.Text.Trim()!="")
+                {
+                    if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
+                    {
+                        columnas = MD.select_NombreColumnas(BDActual, txtTabla.Text);
+                        tuplas=MD.Operacion_Seleccion(BDActual, txtTabla.Text, txtPredicado.Text, columnas);
+                        mostrarResultado = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla.Text, "Error");//Mensaje de error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar una tabla y/o predicado", "Error");//Mensaje de error
+                }
+            }
+
+            if (mostrarResultado)
+            {
+                //Muestra la ventana con la tabla resultante de la operacion
+                Form TablaResultado = new frmTablaResultado(columnas,tuplas);
+                TablaResultado.Show();
+            }
         }
 
         private void btnAcercaDe_Click(object sender, EventArgs e)
