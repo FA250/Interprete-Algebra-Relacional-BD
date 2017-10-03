@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InterpreteAlgebraRelacionalSQL.BD;
+using System.Collections;
 
 namespace InterpreteAlgebraRelacionalSQL
 {
@@ -26,7 +28,6 @@ namespace InterpreteAlgebraRelacionalSQL
         {
 
             lblBDActual.Text = BDActual;
-            lblBDActual.ForeColor = System.Drawing.Color.Green;
             cmbOperacion.SelectedIndex = 0;
         }
 
@@ -59,13 +60,42 @@ namespace InterpreteAlgebraRelacionalSQL
             MessageBox.Show("Se desplegara el manual de usuario", "WIP");//Mensaje que indica al usuario ingresar la placa y verificarlo
         }
 
-       
+
 
         private void btnOperacion_Click(object sender, EventArgs e)
         {
-            //Muestra la ventana con la tabla resultante de la operacion
-            Form TablaResultado = new frmTablaResultado();
-            TablaResultado.Show();
+            ClaseMD MD = new ClaseMD();
+            bool mostrarResultado = false;
+            ArrayList columnas=new ArrayList();
+            ArrayList tuplas = new ArrayList();
+            //Seleccion
+            if (cmbOperacion.SelectedIndex == 0)
+            {
+                if (txtTabla.Text.Trim() != "" && txtPredicado.Text.Trim()!="")
+                {
+                    if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
+                    {
+                        columnas = MD.select_NombreColumnas(BDActual, txtTabla.Text);
+                        tuplas=MD.Operacion_Seleccion(BDActual, txtTabla.Text, txtPredicado.Text, columnas);
+                        mostrarResultado = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla.Text, "Error");//Mensaje de error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar una tabla y/o predicado", "Error");//Mensaje de error
+                }
+            }
+
+            if (mostrarResultado)
+            {
+                //Muestra la ventana con la tabla resultante de la operacion
+                Form TablaResultado = new frmTablaResultado(columnas,tuplas);
+                TablaResultado.Show();
+            }
         }
 
         private void btnAcercaDe_Click(object sender, EventArgs e)

@@ -36,6 +36,32 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             return Resultado;//devolvuelve los datos necesarios
         }
 
+        public String verificar_Tabla(String BD,String Tabla)
+        {
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Verificar_Tabla ?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(Tabla, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+            String Resultado = "";
+
+            //Buscar los campos solicitados
+            while (Contenedor.Read())
+            {
+                Resultado = Contenedor["Resultado"].ToString();
+            }//CONTENEDOR READ
+
+            Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+            return Resultado;//devolvuelve los datos necesarios
+        }
+
         public ArrayList select_NombreColumnas(String BD, String tabla)
         {
             ArrayList columnas=new ArrayList();
@@ -62,8 +88,10 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             return columnas;//devolvuelve los datos necesarios
         }
 
-        public String Operacion_Seleccion(String BD, String tabla, String predicado, ArrayList columnas)
+        public ArrayList Operacion_Seleccion(String BD, String tabla, String predicado, ArrayList columnas)
         {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
             conexion.parametro("", "", "", "");
             conexion.inicializa();
             String consulta;
@@ -81,15 +109,17 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             while (Contenedor.Read())
             {
                 foreach(String columna in columnas){
-                    Contenedor[columna.ToString()].ToString();
+                    atributos.Add(Contenedor[columna.ToString()].ToString());
                 }
+                tuplas.Add(atributos);
+                atributos=new ArrayList();
                 
             }//CONTENEDOR READ
 
             Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
-            String a="a";
-            return a;//devolvuelve los datos necesarios
+           
+            return tuplas;//devolvuelve los datos necesarios
         }
     }
 }

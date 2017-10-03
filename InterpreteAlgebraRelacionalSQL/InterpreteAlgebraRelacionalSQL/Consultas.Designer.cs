@@ -79,7 +79,7 @@
             // 
             this.lblBDActual.AutoSize = true;
             this.lblBDActual.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBDActual.ForeColor = System.Drawing.Color.Red;
+            this.lblBDActual.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(59)))));
             this.lblBDActual.Location = new System.Drawing.Point(194, 23);
             this.lblBDActual.Name = "lblBDActual";
             this.lblBDActual.Size = new System.Drawing.Size(87, 25);
