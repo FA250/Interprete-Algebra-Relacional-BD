@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 
-namespace Parqueo.Clases
+namespace InterpreteAlgebraRelacionalSQL.BD
 {
     class ClaseConexion
     {
