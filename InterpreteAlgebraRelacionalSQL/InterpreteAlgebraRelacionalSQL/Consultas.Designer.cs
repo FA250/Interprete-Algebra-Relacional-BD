@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.btnSalir = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtBDNueva = new System.Windows.Forms.TextBox();
-            this.btnActualizarBD = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblBDActual = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -67,37 +64,6 @@
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 26);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Base de datos:";
-            // 
-            // txtBDNueva
-            // 
-            this.txtBDNueva.Location = new System.Drawing.Point(139, 66);
-            this.txtBDNueva.Name = "txtBDNueva";
-            this.txtBDNueva.Size = new System.Drawing.Size(142, 20);
-            this.txtBDNueva.TabIndex = 5;
-            // 
-            // btnActualizarBD
-            // 
-            this.btnActualizarBD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
-            this.btnActualizarBD.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnActualizarBD.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizarBD.Location = new System.Drawing.Point(287, 61);
-            this.btnActualizarBD.Name = "btnActualizarBD";
-            this.btnActualizarBD.Size = new System.Drawing.Size(91, 32);
-            this.btnActualizarBD.TabIndex = 6;
-            this.btnActualizarBD.Text = "Actualizar";
-            this.btnActualizarBD.UseVisualStyleBackColor = false;
-            this.btnActualizarBD.Click += new System.EventHandler(this.btnActualizarBD_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -125,7 +91,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(405, 67);
+            this.label3.Location = new System.Drawing.Point(15, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 26);
             this.label3.TabIndex = 4;
@@ -150,7 +116,7 @@
             "Concatenación natural",
             "Agregación",
             "Agrupación"});
-            this.cmbOperacion.Location = new System.Drawing.Point(515, 71);
+            this.cmbOperacion.Location = new System.Drawing.Point(125, 74);
             this.cmbOperacion.Name = "cmbOperacion";
             this.cmbOperacion.Size = new System.Drawing.Size(184, 21);
             this.cmbOperacion.TabIndex = 7;
@@ -345,17 +311,14 @@
             this.Controls.Add(this.btnVerTablas);
             this.Controls.Add(this.btnOperacion);
             this.Controls.Add(this.cmbOperacion);
-            this.Controls.Add(this.btnActualizarBD);
             this.Controls.Add(this.txtTabla2);
             this.Controls.Add(this.txtTabla);
-            this.Controls.Add(this.txtBDNueva);
             this.Controls.Add(this.lblBDActual);
             this.Controls.Add(this.lblPredicado);
             this.Controls.Add(this.lblTabla2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTabla);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnAcercaDe);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.btnSalir);
@@ -373,9 +336,6 @@
 
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnAyuda;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtBDNueva;
-        private System.Windows.Forms.Button btnActualizarBD;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblBDActual;
         private System.Windows.Forms.Label label3;

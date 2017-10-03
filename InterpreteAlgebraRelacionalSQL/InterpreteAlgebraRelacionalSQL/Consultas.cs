@@ -15,17 +15,19 @@ namespace InterpreteAlgebraRelacionalSQL
         bool Salir = false;
         string BDActual;
         Form FormIngreso;
-        public frmConsultas(Form Ingreso)
+        public frmConsultas(Form Ingreso,String BD)
         {
-            BDActual = "";
+            BDActual = BD;
             FormIngreso = Ingreso;
             InitializeComponent();
         }
 
         private void frmConsultas_Load(object sender, EventArgs e)
         {
-            cmbOperacion.SelectedIndex = 0;
 
+            lblBDActual.Text = BDActual;
+            lblBDActual.ForeColor = System.Drawing.Color.Green;
+            cmbOperacion.SelectedIndex = 0;
         }
 
         private void frmConsultas_FormClosing(object sender, FormClosingEventArgs e)
@@ -57,40 +59,7 @@ namespace InterpreteAlgebraRelacionalSQL
             MessageBox.Show("Se desplegara el manual de usuario", "WIP");//Mensaje que indica al usuario ingresar la placa y verificarlo
         }
 
-        private void btnActualizarBD_Click(object sender, EventArgs e)
-        {
-            if (txtBDNueva.Text.Trim() == "")
-            {
-                MessageBox.Show("El nombre de la nueva base de datos no puede esta en blanco", "Error");//Mensaje que indica al usuario ingresar la placa y verificarlo
-            }
-            else
-            {
-                if (lblBDActual.Text.Trim() == "Ninguna")
-                {
-                    //Cambia la base de datos que se esta utilizando
-                    BDActual = txtBDNueva.Text;
-                    lblBDActual.Text = BDActual;
-                    lblBDActual.ForeColor = System.Drawing.Color.Green;
-                    txtBDNueva.Text = "";
-                }
-                else
-                {
-                    //Mensaje de aviso preguntando si realmente desea cambiar la base de datos que se esta utilizando actualmente
-                    DialogResult result = MessageBox.Show("Si cambia la base de datos que se esta utilizando se borraran las tablas temporales existentes, ¿Desea continuar?", "Aviso", MessageBoxButtons.YesNo);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        //TODO borrar tablas temporales
-
-                        //Cambia la base de datos que se esta utilizando
-                        BDActual = txtBDNueva.Text;
-                        lblBDActual.Text = BDActual;
-                        lblBDActual.ForeColor = System.Drawing.Color.Green;
-                        txtBDNueva.Text = "";
-                    }
-                }
-            }
-        }
+       
 
         private void btnOperacion_Click(object sender, EventArgs e)
         {
