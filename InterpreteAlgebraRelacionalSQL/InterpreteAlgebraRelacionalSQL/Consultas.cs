@@ -122,7 +122,7 @@ namespace InterpreteAlgebraRelacionalSQL
             else
             { 
                 //Muestra form con las tablas existentes en la BD
-                Form MostrarTablas = new frmMostrarTablas();
+                Form MostrarTablas = new frmMostrarTablas(BDActual);
                 MostrarTablas.Show();
             }
         }
@@ -136,7 +136,7 @@ namespace InterpreteAlgebraRelacionalSQL
             else
             {
                 //Muestra form con las tablas existentes en la BD
-                Form MostrarTablas = new frmMostrarTablas();
+                Form MostrarTablas = new frmMostrarTablas(BDActual);
                 MostrarTablas.Show();
             }
         }

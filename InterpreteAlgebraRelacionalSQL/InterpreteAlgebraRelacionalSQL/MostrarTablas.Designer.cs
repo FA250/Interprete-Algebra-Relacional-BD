@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvResultado = new System.Windows.Forms.DataGridView();
-            this.Atributo1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Atributo2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Atributo3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbTablas = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).BeginInit();
@@ -42,33 +39,11 @@
             this.dgvResultado.AllowUserToAddRows = false;
             this.dgvResultado.AllowUserToDeleteRows = false;
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResultado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Atributo1,
-            this.Atributo2,
-            this.Atributo3});
             this.dgvResultado.Location = new System.Drawing.Point(12, 71);
             this.dgvResultado.Name = "dgvResultado";
             this.dgvResultado.ReadOnly = true;
             this.dgvResultado.Size = new System.Drawing.Size(847, 509);
             this.dgvResultado.TabIndex = 1;
-            // 
-            // Atributo1
-            // 
-            this.Atributo1.HeaderText = "Atributo1";
-            this.Atributo1.Name = "Atributo1";
-            this.Atributo1.ReadOnly = true;
-            // 
-            // Atributo2
-            // 
-            this.Atributo2.HeaderText = "Atributo2";
-            this.Atributo2.Name = "Atributo2";
-            this.Atributo2.ReadOnly = true;
-            // 
-            // Atributo3
-            // 
-            this.Atributo3.HeaderText = "Atributo3";
-            this.Atributo3.Name = "Atributo3";
-            this.Atributo3.ReadOnly = true;
             // 
             // label1
             // 
@@ -91,6 +66,7 @@
             this.cmbTablas.Name = "cmbTablas";
             this.cmbTablas.Size = new System.Drawing.Size(184, 21);
             this.cmbTablas.TabIndex = 8;
+            this.cmbTablas.SelectedIndexChanged += new System.EventHandler(this.cmbTablas_SelectedIndexChanged);
             // 
             // frmMostrarTablas
             // 
@@ -102,7 +78,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvResultado);
             this.Name = "frmMostrarTablas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MostrarTablas";
+            this.Load += new System.EventHandler(this.frmMostrarTablas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -112,9 +90,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvResultado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Atributo1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Atributo2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Atributo3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbTablas;
     }
