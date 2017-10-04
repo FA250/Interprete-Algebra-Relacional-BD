@@ -64,7 +64,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
         public ArrayList select_NombreTablas(String BD)
         {
-            ArrayList tablas = new ArrayList();
+            ArrayList tablas = new ArrayList();            
             conexion.parametro("", "", "", "");
             conexion.inicializa();
             String consulta;
@@ -80,7 +80,11 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             //Buscar los campos solicitados
             while (Contenedor.Read())
             {
-                tablas.Add(Contenedor["TABLE_NAME"].ToString());
+                ArrayList nombreSchema = new ArrayList();
+                nombreSchema.Add(Contenedor["TABLE_NAME"].ToString());
+                nombreSchema.Add(Contenedor["TABLE_SCHEMA"].ToString());
+
+                tablas.Add(nombreSchema);
             }//CONTENEDOR READ
 
             Contenedor.Close();//Cierra contenedor con los datos seleccionados
@@ -88,7 +92,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             return tablas;//devolvuelve los datos necesarios
         }
 
-        public ArrayList select_NombreColumnas(String BD, String tabla)
+        public ArrayList select_NombreColumnas(String BD, String tabla,String esquema)
         {
             ArrayList columnas=new ArrayList();
             conexion.parametro("", "", "", "");
@@ -96,10 +100,11 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             String consulta;
             System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
 
-            consulta = "EXEC Nombre_Columnas ?,?";//numero de parametros
+            consulta = "EXEC Nombre_Columnas ?,?,?";//numero de parametros
             conexion.annadir_consulta(consulta);
             conexion.annadir_parametro(BD, 2);
             conexion.annadir_parametro(tabla, 2);
+            conexion.annadir_parametro(esquema, 2);
 
             Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
 

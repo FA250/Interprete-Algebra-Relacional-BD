@@ -20,7 +20,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
         public void parametro(String bd, String ip, String nom_usuario, String clave)
         {
 
-            strconexion = "Provider=SQLNCLI11;Server=FABIAN-PC;Database=InterpreteSQL;Trusted_Connection=yes";
+            strconexion = "Provider=SQLNCLI11;Server=FABIAN-PC;Database=bdproy1;Trusted_Connection=yes";
 
         }
 

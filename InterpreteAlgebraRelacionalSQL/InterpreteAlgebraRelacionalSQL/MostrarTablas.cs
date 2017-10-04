@@ -22,15 +22,15 @@ namespace InterpreteAlgebraRelacionalSQL
             BDActual = BD;
             InitializeComponent();
         }
+        ArrayList nombreTablas = new ArrayList(); 
 
         private void frmMostrarTablas_Load(object sender, EventArgs e)
         {
-            ArrayList nombreTablas = new ArrayList();            
+                       
             nombreTablas = MD.select_NombreTablas(BDActual);
-
-            foreach (String nombre in nombreTablas)
+            foreach (ArrayList nombre in nombreTablas)
             {
-                cmbTablas.Items.Add(nombre.ToString());
+                cmbTablas.Items.Add(nombre[0].ToString());
             }
         }
 
@@ -42,7 +42,18 @@ namespace InterpreteAlgebraRelacionalSQL
             ArrayList columnas=new ArrayList();
 
             String tabla=cmbTablas.SelectedItem.ToString();
-            columnas=MD.select_NombreColumnas(BDActual,tabla);
+
+            //selecciona el esquema de la tabla
+            int indice=0;
+            foreach(ArrayList NombresTablas in nombreTablas){
+                if(cmbTablas.SelectedIndex==indice){
+                    ArrayList TablaActual = NombresTablas;
+                    columnas=MD.select_NombreColumnas(BDActual,tabla,TablaActual[1].ToString());
+                }
+                indice++;
+            }          
+
+            
 
             ArrayList tuplas = MD.Seleccionar_tabla(BDActual, tabla,columnas);
 

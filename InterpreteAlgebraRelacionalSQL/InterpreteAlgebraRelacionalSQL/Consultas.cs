@@ -17,6 +17,9 @@ namespace InterpreteAlgebraRelacionalSQL
         bool Salir = false;
         string BDActual;
         Form FormIngreso;
+        ArrayList nombreTablas =new ArrayList();
+        ClaseMD MD = new ClaseMD();
+
         public frmConsultas(Form Ingreso,String BD)
         {
             BDActual = BD;
@@ -26,7 +29,7 @@ namespace InterpreteAlgebraRelacionalSQL
 
         private void frmConsultas_Load(object sender, EventArgs e)
         {
-
+            nombreTablas = MD.select_NombreTablas(BDActual);
             lblBDActual.Text = BDActual;
             cmbOperacion.SelectedIndex = 0;
         }
@@ -63,8 +66,7 @@ namespace InterpreteAlgebraRelacionalSQL
 
 
         private void btnOperacion_Click(object sender, EventArgs e)
-        {
-            ClaseMD MD = new ClaseMD();
+        {            
             bool mostrarResultado = false;
             ArrayList columnas=new ArrayList();
             ArrayList tuplas = new ArrayList();
@@ -75,7 +77,15 @@ namespace InterpreteAlgebraRelacionalSQL
                 {
                     if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
                     {
-                        columnas = MD.select_NombreColumnas(BDActual, txtTabla.Text);
+                        //selecciona el esquema de la tabla
+                        foreach (ArrayList NombresTablas in nombreTablas)
+                        {
+                            if (NombresTablas[0].ToString() == txtTabla.Text.Trim())
+                            {
+                                ArrayList TablaActual = NombresTablas;
+                                columnas = MD.select_NombreColumnas(BDActual, txtTabla.Text, TablaActual[1].ToString());
+                            }
+                        } 
                         tuplas=MD.Operacion_Seleccion(BDActual, txtTabla.Text, txtPredicado.Text, columnas);
                         mostrarResultado = true;
                     }
