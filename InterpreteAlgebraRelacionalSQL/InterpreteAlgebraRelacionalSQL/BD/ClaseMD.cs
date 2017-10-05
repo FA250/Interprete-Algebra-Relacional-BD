@@ -64,7 +64,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
         public ArrayList select_NombreTablas(String BD)
         {
-            ArrayList tablas = new ArrayList();            
+            ArrayList tablas = new ArrayList();
             conexion.parametro("", "", "", "");
             conexion.inicializa();
             String consulta;
@@ -77,19 +77,27 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
             Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
 
-            //Buscar los campos solicitados
-            while (Contenedor.Read())
+            if (Contenedor == null)
             {
-                ArrayList nombreSchema = new ArrayList();
-                nombreSchema.Add(Contenedor["TABLE_NAME"].ToString());
-                nombreSchema.Add(Contenedor["TABLE_SCHEMA"].ToString());
+                tablas = null;
+                return tablas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    ArrayList nombreSchema = new ArrayList();
+                    nombreSchema.Add(Contenedor["TABLE_NAME"].ToString());
+                    nombreSchema.Add(Contenedor["TABLE_SCHEMA"].ToString());
 
-                tablas.Add(nombreSchema);
-            }//CONTENEDOR READ
+                    tablas.Add(nombreSchema);
+                }//CONTENEDOR READ
 
-            Contenedor.Close();//Cierra contenedor con los datos seleccionados
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
-            return tablas;//devolvuelve los datos necesarios
+                return tablas;//devolvuelve los datos necesarios
+            }
         }
 
         public ArrayList select_NombreColumnas(String BD, String tabla,String esquema)
@@ -170,21 +178,30 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
             Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
 
-            //Buscar los campos solicitados
-            while (Contenedor.Read())
+            if (Contenedor == null)
             {
-                foreach(String columna in columnas){
-                    atributos.Add(Contenedor[columna.ToString()].ToString());
-                }
-                tuplas.Add(atributos);
-                atributos=new ArrayList();
-                
-            }//CONTENEDOR READ
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    foreach (String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[columna.ToString()].ToString());
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
 
-            Contenedor.Close();//Cierra contenedor con los datos seleccionados
+                }//CONTENEDOR READ
 
-           
-            return tuplas;//devolvuelve los datos necesarios
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devolvuelve los datos necesarios
+            }
         }
     }
 }

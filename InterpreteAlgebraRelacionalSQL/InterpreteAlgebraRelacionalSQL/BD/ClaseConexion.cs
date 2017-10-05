@@ -19,7 +19,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
         public void parametro(String bd, String ip, String nom_usuario, String clave)
         {
-
+            //Conexion si se quiere conectar con otro servidor cambiar la opcion de Server=<nombre_servidor_nuevo>
             strconexion = "Provider=SQLNCLI11;Server=FABIAN-PC;Database=bdproy1;Trusted_Connection=yes";
 
         }
@@ -44,11 +44,20 @@ namespace InterpreteAlgebraRelacionalSQL.BD
         {
             OleDbDataReader busca_int;
             comando.Prepare();
-            busca_int = comando.ExecuteReader();
-            comando.CommandTimeout = 0;
-            return busca_int;
+            try
+            {                                
+                busca_int = comando.ExecuteReader();
+                comando.CommandTimeout = 0;
+                return busca_int;                
+            }
+            catch {
+                busca_int = null;
+                return busca_int; 
+            }
+
             conexion.Close();
             conexion.Dispose();
+
 
         }
         public bool annadir_consulta(String _Consulta)

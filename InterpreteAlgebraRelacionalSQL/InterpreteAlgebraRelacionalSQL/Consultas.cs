@@ -70,7 +70,7 @@ namespace InterpreteAlgebraRelacionalSQL
             bool mostrarResultado = false;
             ArrayList columnas=new ArrayList();
             ArrayList tuplas = new ArrayList();
-            //Seleccion
+            //--------- Seleccion ---------
             if (cmbOperacion.SelectedIndex == 0)
             {
                 if (txtTabla.Text.Trim() != "" && txtPredicado.Text.Trim()!="")
@@ -87,7 +87,15 @@ namespace InterpreteAlgebraRelacionalSQL
                             }
                         } 
                         tuplas=MD.Operacion_Seleccion(BDActual, txtTabla.Text, txtPredicado.Text, columnas);
-                        mostrarResultado = true;
+                        if (tuplas == null)
+                        {
+                            MessageBox.Show("Error al realizar la operación", "Error");//Mensaje de error
+                        }
+                        else
+                        {
+                            mostrarResultado = true;
+                        }
+                        
                     }
                     else
                     {

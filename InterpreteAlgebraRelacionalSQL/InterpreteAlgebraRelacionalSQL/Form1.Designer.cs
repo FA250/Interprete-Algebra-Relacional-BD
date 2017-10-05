@@ -99,6 +99,7 @@
             this.txtBDNueva.Name = "txtBDNueva";
             this.txtBDNueva.Size = new System.Drawing.Size(142, 20);
             this.txtBDNueva.TabIndex = 7;
+            this.txtBDNueva.Text = "bdproy1";
             // 
             // label3
             // 
