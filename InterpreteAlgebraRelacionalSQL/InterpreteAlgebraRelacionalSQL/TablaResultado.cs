@@ -15,6 +15,7 @@ namespace InterpreteAlgebraRelacionalSQL
     {
         ArrayList columnas;
         ArrayList tuplas;
+        String nombreTabla;
         public frmTablaResultado(ArrayList columnasTabla,ArrayList tuplasTabla)
         {
             columnas = columnasTabla;
@@ -47,6 +48,35 @@ namespace InterpreteAlgebraRelacionalSQL
 
             dgvResultado.DataSource = Table;
 
+        }
+
+        private void btnGuardarTabla_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtNombreTabla_TextChanged(object sender, EventArgs e)
+        {
+
+            
+            if (txtNombreTabla.Text.Trim() == "")
+            {
+                btnGuardarTabla.Enabled = false;
+                lblAlgebraLineal.Text = " " + lblAlgebraLineal.Text.ToString().Split(' ')[1];
+            }
+            else
+            {
+                lblAlgebraLineal.Text = " " + lblAlgebraLineal.Text.ToString().Split(' ')[1];
+                lblAlgebraLineal.Text = txtNombreTabla.Text + lblAlgebraLineal.Text;
+                btnGuardarTabla.Enabled = true;
+                //TODO verificar que el nombre no sea una tabla fija de la BD
+                //TODO guardar tabla temporal
+            }
+        }
+
+        private void txtNombreTabla_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ') e.Handled = true;
         }
     }
 }
