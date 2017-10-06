@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterpreteAlgebraRelacionalSQL.BD;
+using System.Collections;
 
 namespace InterpreteAlgebraRelacionalSQL
 {
@@ -70,7 +71,11 @@ namespace InterpreteAlgebraRelacionalSQL
 
                         if (MD.verificar_BD(txtBDNueva.Text) == "existe")
                         {
-                            //TODO borrar tablas temporales
+                            foreach (String tabla in VGlobal.tablasTemporales)
+                            {
+                                MD.Borrar_tabla_temp(BDActual, tabla);
+                            }
+                            VGlobal.tablasTemporales = new ArrayList();
                             MD.Borrar_view_diccionario(BDActual);
                             //Cambia la base de datos que se esta utilizando
                             BDActual = txtBDNueva.Text;
@@ -101,7 +106,11 @@ namespace InterpreteAlgebraRelacionalSQL
 
             if (result == DialogResult.Yes)
             {
-                //TODO borrar tablas temporales
+                foreach (String tabla in VGlobal.tablasTemporales)
+                {
+                    MD.Borrar_tabla_temp(BDActual, tabla);
+                }
+                VGlobal.tablasTemporales = new ArrayList();
                 MD.Borrar_view_diccionario(BDActual);
                 //Cierra la aplicacion
                 Salir = false;
@@ -118,7 +127,11 @@ namespace InterpreteAlgebraRelacionalSQL
 
                 if (result == DialogResult.Yes)
                 {
-                    //TODO borrar tablas temporales
+                    foreach (String tabla in VGlobal.tablasTemporales)
+                    {
+                        MD.Borrar_tabla_temp(BDActual, tabla);
+                    }
+                    VGlobal.tablasTemporales = new ArrayList();
                     MD.Borrar_view_diccionario(BDActual);
                 }
                 else if (result == DialogResult.No)

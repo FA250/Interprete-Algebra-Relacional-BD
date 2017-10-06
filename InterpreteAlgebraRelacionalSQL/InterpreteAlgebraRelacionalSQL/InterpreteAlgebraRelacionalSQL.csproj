@@ -77,6 +77,7 @@
     <Compile Include="TablaResultado.Designer.cs">
       <DependentUpon>TablaResultado.cs</DependentUpon>
     </Compile>
+    <Compile Include="VGlobal.cs" />
     <EmbeddedResource Include="Consultas.resx">
       <DependentUpon>Consultas.cs</DependentUpon>
     </EmbeddedResource>

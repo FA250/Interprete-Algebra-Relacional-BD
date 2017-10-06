@@ -237,6 +237,47 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             //devuelve los datos necesarios
         }
 
+        //---------------- Borrar una tabla temporal ----------------
+        public void Crear_tabla_temp(String BD, String tabla,String NConsulta)
+        {
+
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Crear_tabla_temp ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla, 2);
+            conexion.annadir_parametro(NConsulta, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+            while (Contenedor.Read()) { }//CONTENEDOR READ
+        }
+
+        //---------------- Borrar una tabla temporal ----------------
+        public void Borrar_tabla_temp(String BD, String tabla)
+        {
+
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Borrar_tabla_temp ?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+            while (Contenedor.Read()) { }//CONTENEDOR READ
+        }
+
         //---------------- Seleccionar datos de una tabla ----------------
         public ArrayList Datos_tabla(String BD, String tabla)
         {
@@ -320,5 +361,136 @@ namespace InterpreteAlgebraRelacionalSQL.BD
                 return tuplas;//devuelve los datos necesarios
             }
         }
+
+        //---------------- Operacion de Proyeccion ----------------
+        public ArrayList Operacion_proyeccion(String BD, String listaAtributos, String tabla, ArrayList columnas)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Operacion_proyeccion ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(listaAtributos, 2);
+            conexion.annadir_parametro(tabla, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    foreach (String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[columna.ToString()].ToString());
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Columnas del producto Cartesiano ----------------
+        public ArrayList Columnas_cartesiano(String BD, String tabla1, String tabla2)
+        {
+            ArrayList columnas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Columnas_cartesiano ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(tabla2, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                columnas = null;
+                return columnas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+
+                    columnas.Add(Contenedor["COLUMN_NAME"].ToString());
+
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return columnas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Operacion de Producto Cartesiano ----------------
+        public ArrayList Operacion_producto_cartesiano(String BD, String tabla1, String tabla2, ArrayList columnas)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Operacion_producto_cartesiano ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(tabla2, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    foreach (String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[columna.ToString()].ToString());
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
+
+
+        //----- FIN -----
     }
 }
