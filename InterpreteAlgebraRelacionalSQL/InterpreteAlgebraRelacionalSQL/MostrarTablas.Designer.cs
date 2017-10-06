@@ -38,11 +38,12 @@
             // 
             this.dgvResultado.AllowUserToAddRows = false;
             this.dgvResultado.AllowUserToDeleteRows = false;
+            this.dgvResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResultado.Location = new System.Drawing.Point(12, 71);
             this.dgvResultado.Name = "dgvResultado";
             this.dgvResultado.ReadOnly = true;
-            this.dgvResultado.Size = new System.Drawing.Size(847, 509);
+            this.dgvResultado.Size = new System.Drawing.Size(999, 509);
             this.dgvResultado.TabIndex = 1;
             // 
             // label1
@@ -50,7 +51,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Palatino Linotype", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(261, 20);
+            this.label1.Location = new System.Drawing.Point(364, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 36);
             this.label1.TabIndex = 3;
@@ -62,7 +63,7 @@
             this.cmbTablas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTablas.FormattingEnabled = true;
             this.cmbTablas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmbTablas.Location = new System.Drawing.Point(362, 30);
+            this.cmbTablas.Location = new System.Drawing.Point(465, 29);
             this.cmbTablas.Name = "cmbTablas";
             this.cmbTablas.Size = new System.Drawing.Size(184, 21);
             this.cmbTablas.TabIndex = 8;
@@ -73,7 +74,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(82)))), ((int)(((byte)(151)))));
-            this.ClientSize = new System.Drawing.Size(871, 592);
+            this.ClientSize = new System.Drawing.Size(1023, 592);
             this.Controls.Add(this.cmbTablas);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvResultado);

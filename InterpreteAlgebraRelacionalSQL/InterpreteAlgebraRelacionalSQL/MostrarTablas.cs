@@ -55,12 +55,18 @@ namespace InterpreteAlgebraRelacionalSQL
 
             
 
-            ArrayList tuplas = MD.Seleccionar_tabla(BDActual, tabla,columnas);
+            ArrayList tuplas = MD.Datos_tabla(BDActual, tabla);
 
-            foreach (String columna in columnas)
-            {
-                Table.Columns.Add(new DataColumn(columna.ToString()));
-            }
+
+            Table.Columns.Add(new DataColumn("Atributo"));
+            Table.Columns.Add(new DataColumn("Tipo de dato"));
+            Table.Columns.Add(new DataColumn("Máxima longitud"));
+            Table.Columns.Add(new DataColumn("Precisión numérica"));
+            Table.Columns.Add(new DataColumn("Escala numérica"));
+            Table.Columns.Add(new DataColumn("Llave Primaria"));
+            Table.Columns.Add(new DataColumn("Llave Foranea"));
+            Table.Columns.Add(new DataColumn("Dominio"));
+
             int numeroColumna = 0;
             foreach (ArrayList atributos in tuplas)
             {

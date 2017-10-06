@@ -51,7 +51,7 @@ namespace InterpreteAlgebraRelacionalSQL
             if (result == DialogResult.Yes)
             {
                 //TODO borrar tablas temporales
-
+                MD.Borrar_view_diccionario(BDActual);
                 //Cierra la aplicacion
                 Salir = true;
                 Application.Exit();                                

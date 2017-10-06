@@ -11,6 +11,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
     {
         ClaseConexion conexion = new ClaseConexion();
 
+        //---------------- Verificar BD Exista ---------------- 
         public String verificar_BD(String BD)
         {
             conexion.parametro("", "", "", "");
@@ -33,9 +34,10 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
             Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
-            return Resultado;//devolvuelve los datos necesarios
+            return Resultado;//devuelve los datos necesarios
         }
 
+        //---------------- Verificar tabla Exista ----------------
         public String verificar_Tabla(String BD,String Tabla)
         {
             conexion.parametro("", "", "", "");
@@ -59,9 +61,10 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
             Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
-            return Resultado;//devolvuelve los datos necesarios
+            return Resultado;//devuelve los datos necesarios
         }
 
+        //---------------- Seleccionar nombre de tablas ----------------
         public ArrayList select_NombreTablas(String BD)
         {
             ArrayList tablas = new ArrayList();
@@ -96,10 +99,11 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
                 Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
-                return tablas;//devolvuelve los datos necesarios
+                return tablas;//devuelve los datos necesarios
             }
         }
 
+        //---------------- Seleccionar nombre Columnas ----------------
         public ArrayList select_NombreColumnas(String BD, String tabla,String esquema)
         {
             ArrayList columnas=new ArrayList();
@@ -124,9 +128,10 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
             Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
-            return columnas;//devolvuelve los datos necesarios
+            return columnas;//devuelve los datos necesarios
         }
 
+        //---------------- Seleccionar tablas existentes ----------------
         public ArrayList Seleccionar_tabla(String BD, String tabla, ArrayList columnas)
         {
             ArrayList tuplas = new ArrayList();
@@ -158,9 +163,121 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
 
-            return tuplas;//devolvuelve los datos necesarios
+            return tuplas;//devuelve los datos necesarios
         }
 
+        //---------------- Crear vista diccionario ----------------
+        public void Crear_view_diccionario(String BD)
+        {
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Crear_view_diccionario ?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor!=null)
+            {
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+            }
+            //Buscar los campos solicitados
+            /*while (Contenedor.Read())
+            {
+                foreach (String columna in columnas)
+                {
+                    atributos.Add(Contenedor[columna.ToString()].ToString());
+                }
+                tuplas.Add(atributos);
+                atributos = new ArrayList();
+
+            }//CONTENEDOR READ           
+
+
+            return tuplas;*///devuelve los datos necesarios
+        }
+
+        //---------------- Borrar vista diccionario ----------------
+        public void Borrar_view_diccionario(String BD)
+        {
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Borrar_view_diccionario ?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor != null)
+            {
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+            }
+            //Buscar los campos solicitados
+            /*while (Contenedor.Read())
+            {
+                foreach (String columna in columnas)
+                {
+                    atributos.Add(Contenedor[columna.ToString()].ToString());
+                }
+                tuplas.Add(atributos);
+                atributos = new ArrayList();
+
+            }//CONTENEDOR READ
+
+            
+
+
+            return tuplas;*/
+            //devuelve los datos necesarios
+        }
+
+        //---------------- Seleccionar datos de una tabla ----------------
+        public ArrayList Datos_tabla(String BD, String tabla)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Datos_tabla ?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            //Buscar los campos solicitados
+            while (Contenedor.Read())
+            {
+                atributos.Add(Contenedor["COLUMN_NAME"].ToString());
+                atributos.Add(Contenedor["DATA_TYPE"].ToString());
+                atributos.Add(Contenedor["CHARACTER_MAXIMUM_LENGTH"].ToString());
+                atributos.Add(Contenedor["NUMERIC_PRECISION"].ToString());
+                atributos.Add(Contenedor["NUMERIC_SCALE"].ToString());
+                atributos.Add(Contenedor["Primaria"].ToString());
+                atributos.Add(Contenedor["Foranea"].ToString());
+                atributos.Add(Contenedor["CHECK_CLAUSE"].ToString());
+
+                tuplas.Add(atributos);
+                atributos = new ArrayList();
+
+            }//CONTENEDOR READ
+
+            Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+            return tuplas;//devuelve los datos necesarios
+        }
+
+        //---------------- Operacion de seleccion ----------------
         public ArrayList Operacion_Seleccion(String BD, String tabla, String predicado, ArrayList columnas)
         {
             ArrayList tuplas = new ArrayList();
@@ -200,7 +317,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
                 Contenedor.Close();//Cierra contenedor con los datos seleccionados
 
 
-                return tuplas;//devolvuelve los datos necesarios
+                return tuplas;//devuelve los datos necesarios
             }
         }
     }
