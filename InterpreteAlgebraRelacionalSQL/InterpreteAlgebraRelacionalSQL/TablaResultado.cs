@@ -102,9 +102,19 @@ namespace InterpreteAlgebraRelacionalSQL
                     DialogResult result = MessageBox.Show("La tabla temporal " + txtNombreTabla.Text + " ya existe ¿desea sobreescribirla?", "Aviso", MessageBoxButtons.YesNo);
 
                     if (result == DialogResult.Yes)
-                    { }
-                    break;
+                    {
+                        String error=MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, lblSQL.Text);
+                        if (error == null)
+                        {
+                            MessageBox.Show("No se pudo guardar la tabla " + txtNombreTabla.Text, "Error");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tabla " + txtNombreTabla.Text + " guardada exitosamente", "Aviso");
+                        }
+                    }
                     existeTemp = true;
+                    break;                   
                 }
             }
 
@@ -115,7 +125,16 @@ namespace InterpreteAlgebraRelacionalSQL
                 }
                 else
                 {
-
+                    String error=MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, lblSQL.Text);
+                    if (error == null)
+                    {
+                        MessageBox.Show("No se pudo guardar la tabla "+txtNombreTabla.Text, "Error");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tabla " + txtNombreTabla.Text+" guardada exitosamente", "Aviso");
+                    }
+                    VGlobal.tablasTemporales.Add(txtNombreTabla.Text);
                 }
             }
 

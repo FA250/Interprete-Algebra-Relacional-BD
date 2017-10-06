@@ -237,8 +237,8 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             //devuelve los datos necesarios
         }
 
-        //---------------- Borrar una tabla temporal ----------------
-        public void Crear_tabla_temp(String BD, String tabla,String NConsulta)
+        //---------------- Crear una tabla temporal ----------------
+        public String Crear_tabla_temp(String BD, String tabla,String NConsulta)
         {
 
             conexion.parametro("", "", "", "");
@@ -253,13 +253,20 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             conexion.annadir_parametro(NConsulta, 2);
 
             Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+            if (Contenedor == null)
+            {
+                return null;
+            }
+            else
+            {
+                return "a";
 
-            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
-            while (Contenedor.Read()) { }//CONTENEDOR READ
+                while (Contenedor.Read()) { }//CONTENEDOR READ
+            }
         }
 
         //---------------- Borrar una tabla temporal ----------------
-        public void Borrar_tabla_temp(String BD, String tabla)
+        public String Borrar_tabla_temp(String BD, String tabla)
         {
 
             conexion.parametro("", "", "", "");
@@ -273,9 +280,16 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             conexion.annadir_parametro(tabla, 2);
 
             Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+            if (Contenedor == null)
+            {
+                return null;
+            }
+            else
+            {
+                return "a";
 
-            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
-            while (Contenedor.Read()) { }//CONTENEDOR READ
+                while (Contenedor.Read()) { }//CONTENEDOR READ
+            }
         }
 
         //---------------- Seleccionar datos de una tabla ----------------

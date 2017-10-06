@@ -73,7 +73,12 @@ namespace InterpreteAlgebraRelacionalSQL
                         {
                             foreach (String tabla in VGlobal.tablasTemporales)
                             {
-                                MD.Borrar_tabla_temp(BDActual, tabla);
+                                String error=MD.Borrar_tabla_temp(BDActual, tabla);
+                                if (error == null)
+                                {
+                                    MessageBox.Show("No se pudo borrar la tabla temporal: " +tabla, "Error");
+                                }
+                               
                             }
                             VGlobal.tablasTemporales = new ArrayList();
                             MD.Borrar_view_diccionario(BDActual);
@@ -108,7 +113,11 @@ namespace InterpreteAlgebraRelacionalSQL
             {
                 foreach (String tabla in VGlobal.tablasTemporales)
                 {
-                    MD.Borrar_tabla_temp(BDActual, tabla);
+                    String error = MD.Borrar_tabla_temp(BDActual, tabla);
+                    if (error == null)
+                    {
+                        MessageBox.Show("No se pudo borrar la tabla temporal: " + tabla, "Error");
+                    }
                 }
                 VGlobal.tablasTemporales = new ArrayList();
                 MD.Borrar_view_diccionario(BDActual);
@@ -129,7 +138,11 @@ namespace InterpreteAlgebraRelacionalSQL
                 {
                     foreach (String tabla in VGlobal.tablasTemporales)
                     {
-                        MD.Borrar_tabla_temp(BDActual, tabla);
+                        String error = MD.Borrar_tabla_temp(BDActual, tabla);
+                        if (error == null)
+                        {
+                            MessageBox.Show("No se pudo borrar la tabla temporal: " + tabla, "Error");
+                        }
                     }
                     VGlobal.tablasTemporales = new ArrayList();
                     MD.Borrar_view_diccionario(BDActual);
