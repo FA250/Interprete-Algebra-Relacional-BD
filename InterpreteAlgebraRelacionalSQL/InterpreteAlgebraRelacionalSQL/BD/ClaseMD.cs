@@ -448,7 +448,7 @@ namespace InterpreteAlgebraRelacionalSQL.BD
                 while (Contenedor.Read())
                 {
 
-                    columnas.Add(Contenedor["COLUMN_NAME"].ToString());
+                    columnas.Add(Contenedor["name"].ToString());
 
 
                 }//CONTENEDOR READ
@@ -504,6 +504,91 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             }
         }
 
+        //---------------- Columnas del Join ----------------
+        public ArrayList Columnas_join(String BD, String tabla1, String tabla2, String predicado)
+        {
+            ArrayList columnas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Columnas_join ?,?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(tabla2, 2);
+            conexion.annadir_parametro(predicado, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                columnas = null;
+                return columnas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+
+                    columnas.Add(Contenedor["name"].ToString());
+
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return columnas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Operacion de Join ----------------
+        public ArrayList Operacion_join(String BD, String tabla1, String tabla2, String predicado, ArrayList columnas)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Operacion_join ?,?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(tabla2, 2);
+            conexion.annadir_parametro(predicado, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    foreach (String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[columna.ToString()].ToString());
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
 
         //----- FIN -----
     }

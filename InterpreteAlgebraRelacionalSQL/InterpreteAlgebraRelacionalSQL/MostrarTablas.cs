@@ -16,21 +16,47 @@ namespace InterpreteAlgebraRelacionalSQL
     {
         String BDActual;
         ClaseMD MD = new ClaseMD();
+        ArrayList nombreTablas = new ArrayList();
+        ArrayList noMostrar = new ArrayList();
+        String mostrarTablas;
 
-        public frmMostrarTablas(String BD)
+        public frmMostrarTablas(String BD,String tipoTablas)
         {
             BDActual = BD;
+            mostrarTablas = tipoTablas;
             InitializeComponent();
         }
-        ArrayList nombreTablas = new ArrayList(); 
+
 
         private void frmMostrarTablas_Load(object sender, EventArgs e)
         {
-                       
-            nombreTablas = MD.select_NombreTablas(BDActual);
-            foreach (ArrayList nombre in nombreTablas)
+            if (mostrarTablas == "BD")
             {
-                cmbTablas.Items.Add(nombre[0].ToString());
+                nombreTablas = MD.select_NombreTablas(BDActual);
+                noMostrar = VGlobal.tablasTemporales;
+                foreach (ArrayList nombre in nombreTablas)
+                {
+                    bool mostrar = true;
+                    foreach (String temp in noMostrar)
+                    {
+                        if (nombre[0].ToString() == temp)
+                        {
+                            mostrar = false;
+                        }
+                    }
+                    if (mostrar)
+                    {
+                        cmbTablas.Items.Add(nombre[0].ToString());
+                    }
+
+                }
+            }
+            else
+            {
+                foreach (String nombre in VGlobal.tablasTemporales)
+                {
+                    cmbTablas.Items.Add(nombre);
+                }
             }
         }
 

@@ -41,7 +41,23 @@ namespace InterpreteAlgebraRelacionalSQL
 
             foreach (String columna in columnas)
             {
-                Table.Columns.Add(new DataColumn(columna.ToString()));
+                bool noExisteCol=true;
+                foreach (Object colExistente in Table.Columns)
+                {
+                    if (columna == colExistente.ToString())
+                    {
+                        noExisteCol = false;
+                    }
+                }
+                if (noExisteCol)
+                {
+                    Table.Columns.Add(new DataColumn(columna.ToString()));
+                }
+                else
+                {
+                    Table.Columns.Add(new DataColumn(columna.ToString()+"B"));
+                }
+                
             }
             int numeroColumna = 0;
             foreach (ArrayList atributos in tuplas)

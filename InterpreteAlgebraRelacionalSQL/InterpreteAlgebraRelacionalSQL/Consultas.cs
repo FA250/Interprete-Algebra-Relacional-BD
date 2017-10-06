@@ -166,7 +166,7 @@ namespace InterpreteAlgebraRelacionalSQL
             {
                 //TODO
             }
-            //------------- Producto Cartesiano ------------- 
+            //------------- Producto Cartesiano ------------- TODO falta resolver las columnas repetidas para crear view y recuperar columnas, y de esta forma poder motrarlas
             else if (cmbOperacion.SelectedIndex == 4)
             {
                 if (txtTabla.Text.Trim() != "" && txtTabla2.Text.Trim() != "")
@@ -230,7 +230,48 @@ namespace InterpreteAlgebraRelacionalSQL
             //------------- Join ------------- 
             else if (cmbOperacion.SelectedIndex == 8)
             {
-                //TODO
+                if (txtTabla.Text.Trim() != "" && txtTabla2.Text.Trim() != "" && txtPredicado.Text.Trim()!="")
+                {
+                    if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
+                    {
+                        if (MD.verificar_Tabla(BDActual, txtTabla2.Text) == "existe")
+                        {
+                            columnas = MD.Columnas_join(BDActual, txtTabla.Text, txtTabla2.Text, txtPredicado.Text);
+
+                            if (columnas != null)
+                            {
+
+                                tuplas = MD.Operacion_join(BDActual, txtTabla.Text, txtTabla2.Text,txtPredicado.Text, columnas);
+                                if (tuplas == null)
+                                {
+                                    MessageBox.Show("Error al realizar la operación", "Error");//Mensaje de error
+                                }
+                                else
+                                {
+                                    algebraLineal = txtTabla.Text.Trim() + " ⋈ "+txtPredicado.Text+ " " + txtTabla2.Text.Trim();
+                                    SQL = "SELECT * FROM " + txtTabla.Text + " join " + txtTabla2.Text+" on "+ txtPredicado.Text;
+                                    mostrarResultado = true;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al recuperar columnas de la operación", "Error");//Mensaje de error
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla2.Text, "Error");//Mensaje de error
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla.Text, "Error");//Mensaje de error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar las 2 tablas y el predicado", "Error");//Mensaje de error
+                }
             }
             //------------- Natural join ------------- 
             else if (cmbOperacion.SelectedIndex == 9)
@@ -280,7 +321,7 @@ namespace InterpreteAlgebraRelacionalSQL
             else
             { 
                 //Muestra form con las tablas existentes en la BD
-                Form MostrarTablas = new frmMostrarTablas(BDActual);
+                Form MostrarTablas = new frmMostrarTablas(BDActual,"BD");
                 MostrarTablas.Show();
             }
         }
@@ -294,7 +335,7 @@ namespace InterpreteAlgebraRelacionalSQL
             else
             {
                 //Muestra form con las tablas existentes en la BD
-                Form MostrarTablas = new frmMostrarTablas(BDActual);
+                Form MostrarTablas = new frmMostrarTablas(BDActual,"Temporales");
                 MostrarTablas.Show();
             }
         }
