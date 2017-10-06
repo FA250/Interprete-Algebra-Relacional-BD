@@ -50,8 +50,18 @@ namespace InterpreteAlgebraRelacionalSQL
 
             if (result == DialogResult.Yes)
             {
-                //TODO borrar tablas temporales
+                foreach (String tabla in VGlobal.tablasTemporales)
+                {
+                    String error=MD.Borrar_tabla_temp(BDActual, tabla);
+                    if (error == null)
+                    {
+                        MessageBox.Show("No se pudo borrar la tabla temporal:" + tabla, "Error");
+                    }
+                   
+                }
+                VGlobal.tablasTemporales = new ArrayList();
 
+                MD.Borrar_view_diccionario(BDActual);
                 //Cierra la aplicacion
                 Salir = true;
                 Application.Exit();                                
@@ -70,7 +80,10 @@ namespace InterpreteAlgebraRelacionalSQL
             bool mostrarResultado = false;
             ArrayList columnas=new ArrayList();
             ArrayList tuplas = new ArrayList();
-            //--------- Seleccion ---------
+            String algebraLineal="";
+            String SQL="";
+
+            //------------- Seleccion ------------- 
             if (cmbOperacion.SelectedIndex == 0)
             {
                 if (txtTabla.Text.Trim() != "" && txtPredicado.Text.Trim()!="")
@@ -93,6 +106,8 @@ namespace InterpreteAlgebraRelacionalSQL
                         }
                         else
                         {
+                            algebraLineal = "σ " + txtPredicado.Text.Trim() + "(" + txtTabla.Text.Trim() + ")";
+                            SQL = "SELECT * FROM " + txtTabla.Text + " WHERE " + txtPredicado.Text;
                             mostrarResultado = true;
                         }
                         
@@ -107,11 +122,136 @@ namespace InterpreteAlgebraRelacionalSQL
                     MessageBox.Show("Debe ingresar una tabla y/o predicado", "Error");//Mensaje de error
                 }
             }
+            //------------- Proyeccion ------------- 
+            else if (cmbOperacion.SelectedIndex == 1)
+            {
+                if (txtTabla.Text.Trim() != "" && txtPredicado.Text.Trim() != "")
+                {
+                    if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
+                    {
+                        foreach(String atributo in txtPredicado.Text.Split(',').ToList()){
+                            columnas.Add(atributo.Trim());
+                        }
+
+                        tuplas = MD.Operacion_proyeccion(BDActual, txtPredicado.Text, txtTabla.Text, columnas);
+                        if (tuplas == null)
+                        {
+                            MessageBox.Show("Error al realizar la operación", "Error");//Mensaje de error
+                        }
+                        else
+                        {
+                            algebraLineal = "π " + txtPredicado.Text.Trim() + "(" + txtTabla.Text.Trim() + ")";
+                            SQL = "SELECT "+ txtPredicado.Text+" FROM " + txtTabla.Text ;
+                            mostrarResultado = true;
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla.Text, "Error");//Mensaje de error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar una tabla y/o los atributos", "Error");//Mensaje de error
+                }
+            }
+            //------------- Union ------------- 
+            else if (cmbOperacion.SelectedIndex == 2)
+            {
+                //TODO
+            }
+            //------------- Diferencia ------------- 
+            else if (cmbOperacion.SelectedIndex == 3)
+            {
+                //TODO
+            }
+            //------------- Producto Cartesiano ------------- 
+            else if (cmbOperacion.SelectedIndex == 4)
+            {
+                if (txtTabla.Text.Trim() != "" && txtTabla2.Text.Trim() != "")
+                {
+                    if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
+                    {
+                        if (MD.verificar_Tabla(BDActual, txtTabla2.Text) == "existe")
+                        {
+                            columnas = MD.Columnas_cartesiano(BDActual, txtTabla.Text, txtTabla2.Text);
+
+                            if (columnas != null)
+                            {
+
+                                tuplas = MD.Operacion_producto_cartesiano(BDActual, txtTabla.Text, txtTabla2.Text, columnas);
+                                if (tuplas == null)
+                                {
+                                    MessageBox.Show("Error al realizar la operación", "Error");//Mensaje de error
+                                }
+                                else
+                                {
+                                    algebraLineal =txtTabla.Text.Trim() + " X " + txtTabla2.Text.Trim();
+                                    SQL = "SELECT * FROM " + txtTabla.Text + "," + txtTabla2.Text;
+                                    mostrarResultado = true;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al recuperar columnas de la operación", "Error");//Mensaje de error
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla2.Text, "Error");//Mensaje de error
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla.Text, "Error");//Mensaje de error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar las 2 tablas", "Error");//Mensaje de error
+                }
+            }
+            //------------- Interseccion ------------- 
+            else if (cmbOperacion.SelectedIndex == 5)
+            {
+                //TODO
+            }
+            //------------- Division ------------- 
+            else if (cmbOperacion.SelectedIndex == 6)
+            {
+                //TODO
+            }
+            //------------- Renombrar ------------- 
+            else if (cmbOperacion.SelectedIndex == 7)
+            {
+                //TODO
+            }
+            //------------- Join ------------- 
+            else if (cmbOperacion.SelectedIndex == 8)
+            {
+                //TODO
+            }
+            //------------- Natural join ------------- 
+            else if (cmbOperacion.SelectedIndex == 9)
+            {
+                //TODO
+            }
+            //------------- Agregacion ------------- 
+            else if (cmbOperacion.SelectedIndex == 10)
+            {
+                //TODO
+            }
+            //------------- Agrupacion ------------- 
+            else if (cmbOperacion.SelectedIndex == 11)
+            {
+                //TODO
+            }
 
             if (mostrarResultado)
             {
                 //Muestra la ventana con la tabla resultante de la operacion
-                Form TablaResultado = new frmTablaResultado(columnas,tuplas);
+                Form TablaResultado = new frmTablaResultado(BDActual,columnas,tuplas,algebraLineal,SQL);
                 TablaResultado.Show();
             }
         }
@@ -125,8 +265,8 @@ namespace InterpreteAlgebraRelacionalSQL
                             + "\tFabián Piedra\n"
                             + "\tJose Madrigal\n"
                             + "Fecha Creación: 25/09/2017\n"
-                            + "Última Actualización: 28/09/2017\n"
-                            +"Versión: 0.1";
+                            + "Última Actualización: 06/10/2017\n"
+                            +"Versión: 0.7";
 
             MessageBox.Show(AcercaDe, "Acerda De");//Mensaje que indica al usuario ingresar la placa y verificarlo
         }
@@ -183,8 +323,26 @@ namespace InterpreteAlgebraRelacionalSQL
                 lblAgrupaciones.Visible = false;
                 lblOpAgregacion.Visible = false;
                 txtAgrupaciones.Visible = false;
+                if (cmbOperacion.SelectedIndex == 1)
+                {
+                    lblPredicado.Text = "Atributos:";
+                }
+                else
+                {
+                    lblPredicado.Text = "Predicado:";
+                }
             }
-            else if (cmbOperacion.SelectedIndex == 2 || cmbOperacion.SelectedIndex == 3 || cmbOperacion.SelectedIndex == 4 || cmbOperacion.SelectedIndex == 5 || cmbOperacion.SelectedIndex == 6 || cmbOperacion.SelectedIndex == 9)
+            else if (cmbOperacion.SelectedIndex == 4)
+            {
+                lblTabla2.Visible = true;
+                txtTabla2.Visible = true;
+                lblPredicado.Visible = false;
+                txtPredicado.Visible = false;
+                lblAgrupaciones.Visible = false;
+                lblOpAgregacion.Visible = false;
+                txtAgrupaciones.Visible = false;
+            }
+            else if (cmbOperacion.SelectedIndex == 2 || cmbOperacion.SelectedIndex == 3 || cmbOperacion.SelectedIndex == 5 || cmbOperacion.SelectedIndex == 6 || cmbOperacion.SelectedIndex == 9)
             {
                 lblTabla2.Visible = true;
                 txtTabla2.Visible = true;

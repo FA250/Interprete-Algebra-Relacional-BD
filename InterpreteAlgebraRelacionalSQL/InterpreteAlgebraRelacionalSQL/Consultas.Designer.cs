@@ -201,7 +201,7 @@
             this.btnAyuda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(82)))), ((int)(((byte)(151)))));
             this.btnAyuda.Location = new System.Drawing.Point(705, 12);
             this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(40, 40);
+            this.btnAyuda.Size = new System.Drawing.Size(42, 42);
             this.btnAyuda.TabIndex = 3;
             this.btnAyuda.UseVisualStyleBackColor = false;
             this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);

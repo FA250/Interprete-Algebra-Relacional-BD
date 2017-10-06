@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterpreteAlgebraRelacionalSQL.BD;
+using System.Collections;
 
 namespace InterpreteAlgebraRelacionalSQL
 {
@@ -19,11 +20,10 @@ namespace InterpreteAlgebraRelacionalSQL
         {
             InitializeComponent();
         }
+        ClaseMD MD = new ClaseMD();
 
         private void btnIngreso_Click(object sender, EventArgs e)
         {
-            ClaseMD MD = new ClaseMD();
-
 
             if (BDActual == "Ninguna")
             {
@@ -38,6 +38,8 @@ namespace InterpreteAlgebraRelacionalSQL
                         //Cambia la base de datos que se esta utilizando
                         BDActual = txtBDNueva.Text;
                         txtBDNueva.Text = "";
+
+                        MD.Crear_view_diccionario(BDActual);
 
                         //Abre la ventana de consultas y esconde la ventana de ingreso
                         Form Consultas = new frmConsultas(this, BDActual);
@@ -69,8 +71,17 @@ namespace InterpreteAlgebraRelacionalSQL
 
                         if (MD.verificar_BD(txtBDNueva.Text) == "existe")
                         {
-                            //TODO borrar tablas temporales
-
+                            foreach (String tabla in VGlobal.tablasTemporales)
+                            {
+                                String error=MD.Borrar_tabla_temp(BDActual, tabla);
+                                if (error == null)
+                                {
+                                    MessageBox.Show("No se pudo borrar la tabla temporal: " +tabla, "Error");
+                                }
+                               
+                            }
+                            VGlobal.tablasTemporales = new ArrayList();
+                            MD.Borrar_view_diccionario(BDActual);
                             //Cambia la base de datos que se esta utilizando
                             BDActual = txtBDNueva.Text;
                             txtBDNueva.Text = "";
@@ -100,8 +111,16 @@ namespace InterpreteAlgebraRelacionalSQL
 
             if (result == DialogResult.Yes)
             {
-                //TODO borrar tablas temporales
-
+                foreach (String tabla in VGlobal.tablasTemporales)
+                {
+                    String error = MD.Borrar_tabla_temp(BDActual, tabla);
+                    if (error == null)
+                    {
+                        MessageBox.Show("No se pudo borrar la tabla temporal: " + tabla, "Error");
+                    }
+                }
+                VGlobal.tablasTemporales = new ArrayList();
+                MD.Borrar_view_diccionario(BDActual);
                 //Cierra la aplicacion
                 Salir = false;
                 Application.Exit();
@@ -117,7 +136,16 @@ namespace InterpreteAlgebraRelacionalSQL
 
                 if (result == DialogResult.Yes)
                 {
-                    //TODO borrar tablas temporales
+                    foreach (String tabla in VGlobal.tablasTemporales)
+                    {
+                        String error = MD.Borrar_tabla_temp(BDActual, tabla);
+                        if (error == null)
+                        {
+                            MessageBox.Show("No se pudo borrar la tabla temporal: " + tabla, "Error");
+                        }
+                    }
+                    VGlobal.tablasTemporales = new ArrayList();
+                    MD.Borrar_view_diccionario(BDActual);
                 }
                 else if (result == DialogResult.No)
                 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InterpreteAlgebraRelacionalSQL.BD;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +17,25 @@ namespace InterpreteAlgebraRelacionalSQL
         ArrayList columnas;
         ArrayList tuplas;
         String nombreTabla;
-        public frmTablaResultado(ArrayList columnasTabla,ArrayList tuplasTabla)
+        String BDActual;
+        String algebraLineal;
+        String SQLOp;
+        ClaseMD MD = new ClaseMD();
+        public frmTablaResultado(String BD,ArrayList columnasTabla,ArrayList tuplasTabla,String algebraLinealOP,String OperacionSQL)
         {
             columnas = columnasTabla;
             tuplas = tuplasTabla;
+            BDActual = BD;
+            algebraLineal = algebraLinealOP;
+            SQLOp = OperacionSQL;
             InitializeComponent();
         }
 
         private void frmTablaResultado_Load(object sender, EventArgs e)
         {
+            lblAlgebraLineal.Text = " " + algebraLineal;
+            lblSQL.Text = SQLOp;
+
             DataTable Table = new DataTable();
             DataRow Reglon;
 
@@ -55,28 +66,79 @@ namespace InterpreteAlgebraRelacionalSQL
             
         }
 
+        String ultNombreTabla = " ";
         private void txtNombreTabla_TextChanged(object sender, EventArgs e)
         {
 
             
+            //lblAlgebraLineal.Text.ToString().Split(' ')[1]
             if (txtNombreTabla.Text.Trim() == "")
             {
                 btnGuardarTabla.Enabled = false;
-                lblAlgebraLineal.Text = " " + lblAlgebraLineal.Text.ToString().Split(' ')[1];
+                lblAlgebraLineal.Text = lblAlgebraLineal.Text.ToString().Replace(ultNombreTabla + " <- ", " ");
+                ultNombreTabla = " ";      
             }
             else
             {
-                lblAlgebraLineal.Text = " " + lblAlgebraLineal.Text.ToString().Split(' ')[1];
-                lblAlgebraLineal.Text = txtNombreTabla.Text + lblAlgebraLineal.Text;
+                lblAlgebraLineal.Text = lblAlgebraLineal.Text.ToString().Replace(ultNombreTabla + " <- ", " ");
+                lblAlgebraLineal.Text = txtNombreTabla.Text +" <-"+ lblAlgebraLineal.Text;
                 btnGuardarTabla.Enabled = true;
-                //TODO verificar que el nombre no sea una tabla fija de la BD
-                //TODO guardar tabla temporal
+                ultNombreTabla = txtNombreTabla.Text;            
             }
         }
 
         private void txtNombreTabla_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == ' ') e.Handled = true;
+        }
+
+        private void btnGuardarTabla_Click_1(object sender, EventArgs e)
+        {
+            Boolean existeTemp = false;
+            foreach (String tabla in VGlobal.tablasTemporales)
+            {
+                if (txtNombreTabla.Text == tabla)
+                {
+                    DialogResult result = MessageBox.Show("La tabla temporal " + txtNombreTabla.Text + " ya existe ¿desea sobreescribirla?", "Aviso", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        String error=MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, lblSQL.Text);
+                        if (error == null)
+                        {
+                            MessageBox.Show("No se pudo guardar la tabla " + txtNombreTabla.Text, "Error");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tabla " + txtNombreTabla.Text + " guardada exitosamente", "Aviso");
+                        }
+                    }
+                    existeTemp = true;
+                    break;                   
+                }
+            }
+
+            if (!existeTemp)
+            {
+                if(MD.verificar_Tabla(BDActual,txtNombreTabla.Text)=="existe"){
+                    MessageBox.Show("ERROR: NO SE PUEDE DEJAR EL RESULTADO EN UNA TABLA PERMANENTE DE LA BASE DE DATOS.", "Error");
+                }
+                else
+                {
+                    String error=MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, lblSQL.Text);
+                    if (error == null)
+                    {
+                        MessageBox.Show("No se pudo guardar la tabla "+txtNombreTabla.Text, "Error");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tabla " + txtNombreTabla.Text+" guardada exitosamente", "Aviso");
+                    }
+                    VGlobal.tablasTemporales.Add(txtNombreTabla.Text);
+                }
+            }
+
+
         }
     }
 }
