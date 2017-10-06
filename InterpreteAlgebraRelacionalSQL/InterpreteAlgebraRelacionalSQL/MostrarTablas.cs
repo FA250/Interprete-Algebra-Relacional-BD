@@ -58,8 +58,6 @@ namespace InterpreteAlgebraRelacionalSQL
                     cmbTablas.Items.Add(nombre);
                 }
             }
-
-
         }
 
 
