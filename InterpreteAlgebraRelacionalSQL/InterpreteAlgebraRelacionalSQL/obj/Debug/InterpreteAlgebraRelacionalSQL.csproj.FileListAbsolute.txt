@@ -22,3 +22,4 @@ C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-B
 C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.Properties.Resources.resources
 C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.frmTablaResultado.resources
 C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.csproj.GenerateResource.Cache
+C:\Fabian\2017\Segundo Semestre\BD\Visual\Github\Interprete-Algebra-Relacional-BD\InterpreteAlgebraRelacionalSQL\InterpreteAlgebraRelacionalSQL\obj\Debug\InterpreteAlgebraRelacionalSQL.OtrasConsultas.resources

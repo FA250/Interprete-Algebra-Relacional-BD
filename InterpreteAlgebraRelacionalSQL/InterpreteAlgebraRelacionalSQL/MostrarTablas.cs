@@ -51,6 +51,14 @@ namespace InterpreteAlgebraRelacionalSQL
 
                 }
             }
+            else if (mostrarTablas == "Todas")
+            {
+                nombreTablas = MD.select_NombreTablas(BDActual);
+                foreach (ArrayList nombre in nombreTablas)
+                {
+                    cmbTablas.Items.Add(nombre[0].ToString());
+                }
+            }
             else
             {
                 foreach (String nombre in VGlobal.tablasTemporales)
@@ -77,35 +85,64 @@ namespace InterpreteAlgebraRelacionalSQL
                     columnas=MD.select_NombreColumnas(BDActual,tabla,TablaActual[1].ToString());
                 }
                 indice++;
-            }          
+            }
 
-            
+            ArrayList tuplas = new ArrayList();
 
-            ArrayList tuplas = MD.Datos_tabla(BDActual, tabla);
-
-
-            Table.Columns.Add(new DataColumn("Atributo"));
-            Table.Columns.Add(new DataColumn("Tipo de dato"));
-            Table.Columns.Add(new DataColumn("Máxima longitud"));
-            Table.Columns.Add(new DataColumn("Precisión numérica"));
-            Table.Columns.Add(new DataColumn("Escala numérica"));
-            Table.Columns.Add(new DataColumn("Llave Primaria"));
-            Table.Columns.Add(new DataColumn("Llave Foranea"));
-            Table.Columns.Add(new DataColumn("Dominio"));
-
-            int numeroColumna = 0;
-            foreach (ArrayList atributos in tuplas)
+            if (mostrarTablas == "Todas")
             {
-                Reglon = Table.NewRow();
-                numeroColumna = 0;
-                foreach (String item in atributos)
+                tuplas = MD.Seleccionar_tabla(BDActual, tabla,columnas);
+
+                foreach (String columna in columnas)
                 {
-                    Reglon[numeroColumna] = item.ToString();
-                    numeroColumna++;
+                    Table.Columns.Add(new DataColumn(columna));
                 }
 
-                Table.Rows.Add(Reglon);
+                int numeroColumna = 0;
+                foreach (ArrayList atributos in tuplas)
+                {
+                    Reglon = Table.NewRow();
+                    numeroColumna = 0;
+                    foreach (String item in atributos)
+                    {
+                        Reglon[numeroColumna] = item.ToString();
+                        numeroColumna++;
+                    }
+
+                    Table.Rows.Add(Reglon);
+                }
+
             }
+            else
+            {
+                tuplas = MD.Datos_tabla(BDActual, tabla);
+
+                Table.Columns.Add(new DataColumn("Atributo"));
+                Table.Columns.Add(new DataColumn("Tipo de dato"));
+                Table.Columns.Add(new DataColumn("Máxima longitud"));
+                Table.Columns.Add(new DataColumn("Precisión numérica"));
+                Table.Columns.Add(new DataColumn("Escala numérica"));
+                Table.Columns.Add(new DataColumn("Llave Primaria"));
+                Table.Columns.Add(new DataColumn("Llave Foranea"));
+                Table.Columns.Add(new DataColumn("Dominio"));
+
+                int numeroColumna = 0;
+                foreach (ArrayList atributos in tuplas)
+                {
+                    Reglon = Table.NewRow();
+                    numeroColumna = 0;
+                    foreach (String item in atributos)
+                    {
+                        Reglon[numeroColumna] = item.ToString();
+                        numeroColumna++;
+                    }
+
+                    Table.Rows.Add(Reglon);
+                }
+            }           
+
+
+            
 
             dgvResultado.DataSource = Table;
         }

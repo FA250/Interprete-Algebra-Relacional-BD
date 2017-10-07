@@ -28,21 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnIngreso = new System.Windows.Forms.Button();
             this.txtBDNueva = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cmbUsuario = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // txtUsuario
-            // 
-            this.txtUsuario.Location = new System.Drawing.Point(161, 104);
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(142, 20);
-            this.txtUsuario.TabIndex = 0;
             // 
             // label1
             // 
@@ -112,23 +105,38 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Base de datos:";
             // 
+            // cmbUsuario
+            // 
+            this.cmbUsuario.DisplayMember = "Selección";
+            this.cmbUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUsuario.FormattingEnabled = true;
+            this.cmbUsuario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cmbUsuario.Items.AddRange(new object[] {
+            "dbaproy1",
+            "usproy1"});
+            this.cmbUsuario.Location = new System.Drawing.Point(161, 104);
+            this.cmbUsuario.Name = "cmbUsuario";
+            this.cmbUsuario.Size = new System.Drawing.Size(142, 21);
+            this.cmbUsuario.TabIndex = 8;
+            // 
             // frmIngreso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(82)))), ((int)(((byte)(151)))));
             this.ClientSize = new System.Drawing.Size(365, 280);
+            this.Controls.Add(this.cmbUsuario);
             this.Controls.Add(this.txtBDNueva);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnIngreso);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtUsuario);
             this.Name = "frmIngreso";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingreso";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmIngreso_FormClosing);
+            this.Load += new System.EventHandler(this.frmIngreso_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,13 +144,13 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnIngreso;
         private System.Windows.Forms.TextBox txtBDNueva;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbUsuario;
     }
 }
 

@@ -249,7 +249,7 @@ namespace InterpreteAlgebraRelacionalSQL
                                 else
                                 {
                                     algebraLineal = txtTabla.Text.Trim() + " ⋈ "+txtPredicado.Text+ " " + txtTabla2.Text.Trim();
-                                    SQL = "SELECT * FROM " + txtTabla.Text + " join " + txtTabla2.Text+" on "+ txtPredicado.Text;
+                                    SQL = "SELECT * FROM " + txtTabla.Text + " JOIN " + txtTabla2.Text+" ON "+ txtPredicado.Text;
                                     mostrarResultado = true;
                                 }
                             }
@@ -281,12 +281,90 @@ namespace InterpreteAlgebraRelacionalSQL
             //------------- Agregacion ------------- 
             else if (cmbOperacion.SelectedIndex == 10)
             {
-                //TODO
+                if (txtTabla.Text.Trim() != "" && txtPredicado.Text.Trim() != "")
+                {
+                    if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
+                    {
+                        columnas = MD.Columnas_agregacion(BDActual, txtTabla.Text, txtPredicado.Text);
+
+                        if (columnas != null)
+                        {
+
+                            tuplas = MD.Operacion_agregacion(BDActual, txtTabla.Text, txtPredicado.Text, columnas);
+                            if (tuplas == null)
+                            {
+                                MessageBox.Show("Error al realizar la operación", "Error");//Mensaje de error
+                            }
+                            else
+                            {
+                                algebraLineal = "Ģ " + txtPredicado.Text.Trim() + "(" + txtTabla.Text.Trim() + ")";
+                                SQL = "SELECT " + txtPredicado.Text.Trim() + " FROM " + txtTabla.Text;
+                                mostrarResultado = true;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error al recuperar columnas de la operación", "Error");//Mensaje de error
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla.Text, "Error");//Mensaje de error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar la tabla y las funciones de agregación", "Error");//Mensaje de error
+                }
             }
             //------------- Agrupacion ------------- 
             else if (cmbOperacion.SelectedIndex == 11)
             {
-                //TODO
+                if (txtTabla.Text.Trim() != ""  && txtAgrupaciones.Text.Trim() != "")
+                {
+                    if (MD.verificar_Tabla(BDActual, txtTabla.Text) == "existe")
+                    {
+                        String agregaciones = "";
+                        if(txtPredicado.Text.Trim()!=""){
+                            agregaciones = ", " + txtPredicado.Text;
+                        }
+                        else
+                        {
+                            agregaciones = " ";
+                        }
+                        columnas = MD.Columnas_agrupacion(BDActual, txtTabla.Text, txtAgrupaciones.Text, agregaciones);
+
+                            if (columnas != null)
+                            {
+
+                                tuplas = MD.Operacion_agrupacion(BDActual, txtTabla.Text, txtAgrupaciones.Text, agregaciones, columnas);
+                                if (tuplas == null)
+                                {
+                                    MessageBox.Show("Error al realizar la operación", "Error");//Mensaje de error
+                                }
+                                else
+                                {
+                                    algebraLineal = txtAgrupaciones.Text.Trim() + " Ģ " + txtPredicado.Text.Trim() + "(" + txtTabla.Text.Trim()+")";
+                                    SQL = "SELECT " + txtAgrupaciones.Text.Trim() + agregaciones + " FROM " + txtTabla.Text + " GROUP BY " + txtAgrupaciones.Text.Trim();
+                                    mostrarResultado = true;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al recuperar columnas de la operación", "Error");//Mensaje de error
+                            }                        
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: NO EXISTE LA TABLA " + txtTabla.Text, "Error");//Mensaje de error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar la tabla y las agrupaciones", "Error");//Mensaje de error
+                }
             }
 
             if (mostrarResultado)
@@ -307,7 +385,7 @@ namespace InterpreteAlgebraRelacionalSQL
                             + "\tJose Madrigal\n"
                             + "Fecha Creación: 25/09/2017\n"
                             + "Última Actualización: 06/10/2017\n"
-                            +"Versión: 0.7";
+                            +"Versión: 0.8";
 
             MessageBox.Show(AcercaDe, "Acerda De");//Mensaje que indica al usuario ingresar la placa y verificarlo
         }
@@ -422,6 +500,29 @@ namespace InterpreteAlgebraRelacionalSQL
                 lblAgrupaciones.Visible = true;
                 txtPredicado.Visible = true;
                 txtAgrupaciones.Visible = true;
+            }
+        }
+
+        private void btnOtrasConsultas_Click(object sender, EventArgs e)
+        {
+            Salir = true;
+
+            
+
+            this.Close();
+        }
+
+        private void btnDatosTabla_Click(object sender, EventArgs e)
+        {
+            if (lblBDActual.Text.Trim() == "Ninguna")
+            {
+                MessageBox.Show("Primero debe seleccionar una base de datos", "Error");//Mensaje que indica al usuario ingresar la placa y verificarlo
+            }
+            else
+            {
+                //Muestra form con las tablas existentes en la BD
+                Form MostrarTablas = new frmMostrarTablas(BDActual, "Todas");
+                MostrarTablas.Show();
             }
         }
 

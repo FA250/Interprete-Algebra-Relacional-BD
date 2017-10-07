@@ -77,11 +77,6 @@ namespace InterpreteAlgebraRelacionalSQL
 
         }
 
-        private void btnGuardarTabla_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         String ultNombreTabla = " ";
         private void txtNombreTabla_TextChanged(object sender, EventArgs e)
         {
@@ -148,9 +143,9 @@ namespace InterpreteAlgebraRelacionalSQL
                     }
                     else
                     {
+                        VGlobal.tablasTemporales.Add(txtNombreTabla.Text);
                         MessageBox.Show("Tabla " + txtNombreTabla.Text+" guardada exitosamente", "Aviso");
-                    }
-                    VGlobal.tablasTemporales.Add(txtNombreTabla.Text);
+                    }                   
                 }
             }
 
