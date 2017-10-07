@@ -10,5 +10,6 @@ namespace InterpreteAlgebraRelacionalSQL
     class VGlobal
     {
         public static ArrayList tablasTemporales = new ArrayList();
+        public static String usuarioActual = "";
     }
 }

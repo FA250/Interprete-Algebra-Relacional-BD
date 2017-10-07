@@ -39,6 +39,8 @@ namespace InterpreteAlgebraRelacionalSQL
                         BDActual = txtBDNueva.Text;
                         txtBDNueva.Text = "";
 
+                        VGlobal.usuarioActual = cmbUsuario.Text;
+
                         MD.Crear_view_diccionario(BDActual);
 
                         //Abre la ventana de consultas y esconde la ventana de ingreso
@@ -154,6 +156,11 @@ namespace InterpreteAlgebraRelacionalSQL
                 }
                 
             }
+        }
+
+        private void frmIngreso_Load(object sender, EventArgs e)
+        {
+            cmbUsuario.SelectedIndex = 0;
         }
     }
 }

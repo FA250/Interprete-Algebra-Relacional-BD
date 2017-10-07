@@ -64,6 +64,12 @@
     <Compile Include="MostrarTablas.Designer.cs">
       <DependentUpon>MostrarTablas.cs</DependentUpon>
     </Compile>
+    <Compile Include="OtrasConsultas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtrasConsultas.Designer.cs">
+      <DependentUpon>OtrasConsultas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -86,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MostrarTablas.resx">
       <DependentUpon>MostrarTablas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtrasConsultas.resx">
+      <DependentUpon>OtrasConsultas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

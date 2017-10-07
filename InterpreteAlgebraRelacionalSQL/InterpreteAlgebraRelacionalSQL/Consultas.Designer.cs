@@ -48,6 +48,8 @@
             this.lblOpAgregacion = new System.Windows.Forms.Label();
             this.lblAgrupaciones = new System.Windows.Forms.Label();
             this.txtAgrupaciones = new System.Windows.Forms.TextBox();
+            this.btnOtrasConsultas = new System.Windows.Forms.Button();
+            this.btnDatosTabla = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSalir
@@ -127,9 +129,9 @@
             this.btnOperacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
             this.btnOperacion.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOperacion.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOperacion.Location = new System.Drawing.Point(719, 290);
+            this.btnOperacion.Location = new System.Drawing.Point(719, 317);
             this.btnOperacion.Name = "btnOperacion";
-            this.btnOperacion.Size = new System.Drawing.Size(140, 68);
+            this.btnOperacion.Size = new System.Drawing.Size(140, 61);
             this.btnOperacion.TabIndex = 8;
             this.btnOperacion.Text = "Realizar operación";
             this.btnOperacion.UseVisualStyleBackColor = false;
@@ -296,16 +298,45 @@
             this.txtAgrupaciones.TabIndex = 5;
             this.txtAgrupaciones.Visible = false;
             // 
+            // btnOtrasConsultas
+            // 
+            this.btnOtrasConsultas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
+            this.btnOtrasConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOtrasConsultas.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOtrasConsultas.Location = new System.Drawing.Point(719, 240);
+            this.btnOtrasConsultas.Name = "btnOtrasConsultas";
+            this.btnOtrasConsultas.Size = new System.Drawing.Size(140, 61);
+            this.btnOtrasConsultas.TabIndex = 9;
+            this.btnOtrasConsultas.Text = "Otras Consulta";
+            this.btnOtrasConsultas.UseVisualStyleBackColor = false;
+            this.btnOtrasConsultas.Visible = false;
+            this.btnOtrasConsultas.Click += new System.EventHandler(this.btnOtrasConsultas_Click);
+            // 
+            // btnDatosTabla
+            // 
+            this.btnDatosTabla.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
+            this.btnDatosTabla.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDatosTabla.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDatosTabla.Location = new System.Drawing.Point(482, 16);
+            this.btnDatosTabla.Name = "btnDatosTabla";
+            this.btnDatosTabla.Size = new System.Drawing.Size(140, 38);
+            this.btnDatosTabla.TabIndex = 11;
+            this.btnDatosTabla.Text = "Datos Tablas";
+            this.btnDatosTabla.UseVisualStyleBackColor = false;
+            this.btnDatosTabla.Click += new System.EventHandler(this.btnDatosTabla_Click);
+            // 
             // frmConsultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(82)))), ((int)(((byte)(151)))));
             this.ClientSize = new System.Drawing.Size(871, 390);
+            this.Controls.Add(this.btnDatosTabla);
             this.Controls.Add(this.txtAgrupaciones);
             this.Controls.Add(this.lblAgrupaciones);
             this.Controls.Add(this.txtPredicado);
             this.Controls.Add(this.lblOpAgregacion);
+            this.Controls.Add(this.btnOtrasConsultas);
             this.Controls.Add(this.btnReferenciaCruzada);
             this.Controls.Add(this.btnTablasTemporales);
             this.Controls.Add(this.btnVerTablas);
@@ -354,5 +385,7 @@
         private System.Windows.Forms.Label lblOpAgregacion;
         private System.Windows.Forms.Label lblAgrupaciones;
         private System.Windows.Forms.TextBox txtAgrupaciones;
+        private System.Windows.Forms.Button btnOtrasConsultas;
+        private System.Windows.Forms.Button btnDatosTabla;
     }
 }

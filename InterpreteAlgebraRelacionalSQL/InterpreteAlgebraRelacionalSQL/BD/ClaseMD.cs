@@ -590,6 +590,176 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             }
         }
 
+        //---------------- Columnas de la agregacion ----------------
+        public ArrayList Columnas_agregacion(String BD, String tabla1, String agregacion)
+        {
+            ArrayList columnas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Columnas_agregacion ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(agregacion, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                columnas = null;
+                return columnas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    columnas.Add(Contenedor["name"].ToString());
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return columnas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Operacion de agregacion ----------------
+        public ArrayList Operacion_agregacion(String BD, String tabla1, String agregacion, ArrayList columnas)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Operacion_agregacion ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(agregacion, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                int i = 0;
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    i = 0;
+                    foreach (String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[i].ToString());
+                        i++;
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Columnas de la agrupacion ----------------
+        public ArrayList Columnas_agrupacion(String BD, String tabla1, String agrupacion, String agregacion)
+        {
+            ArrayList columnas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Columnas_agrupacion ?,?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(agrupacion, 2);
+            conexion.annadir_parametro(agregacion, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                columnas = null;
+                return columnas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    columnas.Add(Contenedor["name"].ToString());
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return columnas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Operacion de Agrupacion ----------------
+        public ArrayList Operacion_agrupacion(String BD, String tabla1, String agrupacion, String agregacion, ArrayList columnas)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Operacion_agrupacion ?,?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(agrupacion, 2);
+            conexion.annadir_parametro(agregacion, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                int i = 0;
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    i = 0;
+                    foreach (String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[i].ToString());
+                        i++;
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
+
         //----- FIN -----
     }
 }
