@@ -369,6 +369,54 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
             return tuplas;//devuelve los datos necesarios
         }
+        //---------------- Validacion de dominio----------------
+        public ArrayList Validar_dominio(String BD, String tabla, String tabla2)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Validar_dominio ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla, 2);
+            conexion.annadir_parametro(tabla2, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+
+                    atributos.Add(Contenedor["COLUMN_NAME"].ToString());
+                    atributos.Add(Contenedor["ORDINAL_POSITION"].ToString());
+                    atributos.Add(Contenedor["TABLE_NAME"].ToString());
+                    atributos.Add(Contenedor["DATA_TYPE"].ToString());
+                    atributos.Add(Contenedor["CHARACTER_MAXIMUM_LENGTH"].ToString());
+                    atributos.Add(Contenedor["NUMERIC_PRECISION"].ToString());
+
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
 
         //---------------- Operacion de seleccion ----------------
         public ArrayList Operacion_Seleccion(String BD, String tabla, String predicado, ArrayList columnas)
@@ -633,6 +681,90 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
 
             consulta = "EXEC Operacion_union ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(tabla2, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tuplas = null;
+                return tuplas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    foreach (String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[columna.ToString()].ToString());
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Columnas de la diferencia de conjuntos  ----------------
+        public ArrayList Columnas_diferencia(String BD, String tabla1, String tabla2)
+        {
+            ArrayList columnas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Columnas_diferencia ?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla1, 2);
+            conexion.annadir_parametro(tabla2, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                columnas = null;
+                return columnas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+
+                    columnas.Add(Contenedor["name"].ToString());
+
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return columnas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Operacion de Diferencia conjuntos ----------------
+        public ArrayList Operacion_diferencia(String BD, String tabla1, String tabla2, ArrayList columnas)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Operacion_diferencia ?,?,?";//numero de parametros
             conexion.annadir_consulta(consulta);
             conexion.annadir_parametro(BD, 2);
             conexion.annadir_parametro(tabla1, 2);
