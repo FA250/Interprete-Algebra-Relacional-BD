@@ -38,6 +38,9 @@
             // 
             this.dgvTablasDeAtributo.AllowUserToAddRows = false;
             this.dgvTablasDeAtributo.AllowUserToDeleteRows = false;
+            this.dgvTablasDeAtributo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTablasDeAtributo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvTablasDeAtributo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTablasDeAtributo.Location = new System.Drawing.Point(12, 69);

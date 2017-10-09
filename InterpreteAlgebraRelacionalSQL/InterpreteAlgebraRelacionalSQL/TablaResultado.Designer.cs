@@ -46,6 +46,9 @@
             // 
             this.dgvResultado.AllowUserToAddRows = false;
             this.dgvResultado.AllowUserToDeleteRows = false;
+            this.dgvResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResultado.Location = new System.Drawing.Point(12, 177);
             this.dgvResultado.Name = "dgvResultado";
