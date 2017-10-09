@@ -339,6 +339,119 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             }
         }
 
+        //---------------- Columnas de renombrar ----------------
+        public ArrayList Columnas_renombrar(String BD, String tabla, String nuevaTabla, String nuevosAtributos)
+        {
+            ArrayList columnas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Columnas_renombrar ?,?,?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla, 2);
+            conexion.annadir_parametro(nuevaTabla, 2);
+            conexion.annadir_parametro(nuevosAtributos, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                columnas = null;
+                return columnas;
+            }
+            else
+            {
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+                return columnas;//devuelve los datos necesarios
+            }
+
+        }
+
+        //---------------- Columnas de renombrar ----------------
+        public ArrayList Columnas_renombrar2(String BD, String nuevaTabla)
+        {
+            ArrayList columnas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Columnas_renombrar2 ?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(nuevaTabla, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                columnas = null;
+                return columnas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    columnas.Add(Contenedor["name"].ToString());
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return columnas;//devuelve los datos necesarios
+            }
+        }
+
+        //---------------- Operacion renombrar ----------------
+        public ArrayList Operacion_renombrar(String BD, String tabla,ArrayList columnas)
+        {
+            ArrayList atributos = new ArrayList();
+            ArrayList tuplas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Operacion_renombrar ?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(tabla, 2);
+            
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+            if (Contenedor == null)
+            {
+                return null;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    int i = 0;
+                    foreach(String columna in columnas)
+                    {
+                        atributos.Add(Contenedor[i].ToString());
+                        i++;
+                    }
+                    tuplas.Add(atributos);
+                    atributos = new ArrayList();
+
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+                return tuplas;//devuelve los datos necesarios
+            }
+        }
+
         //---------------- Borrar una tabla temporal ----------------
         public String Borrar_tabla_temp(String BD, String tabla)
         {
@@ -662,6 +775,8 @@ namespace InterpreteAlgebraRelacionalSQL.BD
                 return tuplas;//devuelve los datos necesarios
             }
         }
+
+        
 
         //---------------- Columnas de la proyeccion ----------------
         public ArrayList Columnas_proyeccion(String BD, String tabla1, String listaAtributos)

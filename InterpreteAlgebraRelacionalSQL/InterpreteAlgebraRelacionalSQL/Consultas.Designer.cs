@@ -250,7 +250,7 @@
             this.lblTabla2.AutoSize = true;
             this.lblTabla2.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTabla2.ForeColor = System.Drawing.Color.White;
-            this.lblTabla2.Location = new System.Drawing.Point(369, 154);
+            this.lblTabla2.Location = new System.Drawing.Point(345, 154);
             this.lblTabla2.Name = "lblTabla2";
             this.lblTabla2.Size = new System.Drawing.Size(77, 26);
             this.lblTabla2.TabIndex = 4;
