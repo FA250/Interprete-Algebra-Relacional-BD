@@ -103,6 +103,42 @@ namespace InterpreteAlgebraRelacionalSQL.BD
             }
         }
 
+
+        //---------------- Seleccionar nombre de todos los atributos de la BD ----------------
+        public ArrayList Todos_atributos(String BD)
+        {
+            ArrayList tablas = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Todos_atributos ?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            if (Contenedor == null)
+            {
+                tablas = null;
+                return tablas;
+            }
+            else
+            {
+                //Buscar los campos solicitados
+                while (Contenedor.Read())
+                {
+                    tablas.Add(Contenedor["COLUMN_NAME"].ToString());
+                }//CONTENEDOR READ
+
+                Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+                return tablas;//devuelve los datos necesarios
+            }
+        }
+
         //---------------- Cantidad de columnas de una tabla ----------------
         public int cant_Columnas(String BD,String tabla)
         {
@@ -369,6 +405,47 @@ namespace InterpreteAlgebraRelacionalSQL.BD
 
             return tuplas;//devuelve los datos necesarios
         }
+
+        //---------------- Seleccionar datos de un atributo ----------------
+        public ArrayList Datos_atributos(String BD, String atributo)
+        {
+            ArrayList tuplas = new ArrayList();
+            ArrayList atributos = new ArrayList();
+            conexion.parametro("", "", "", "");
+            conexion.inicializa();
+            String consulta;
+            System.Data.OleDb.OleDbDataReader Contenedor;//crea un contenedor de la base de datos
+
+            consulta = "EXEC Datos_atributos ?,?";//numero de parametros
+            conexion.annadir_consulta(consulta);
+            conexion.annadir_parametro(BD, 2);
+            conexion.annadir_parametro(atributo, 2);
+
+            Contenedor = conexion.busca(); //BUSCA EJECUTA EL SQL QUE LE DIMOS ARRIBA A LA VARIABLE CONEXION
+
+            //Buscar los campos solicitados
+            while (Contenedor.Read())
+            {
+                atributos.Add(Contenedor["TABLE_NAME"].ToString());
+                atributos.Add(Contenedor["DATA_TYPE"].ToString());
+                atributos.Add(Contenedor["CHARACTER_MAXIMUM_LENGTH"].ToString());
+                atributos.Add(Contenedor["NUMERIC_PRECISION"].ToString());
+                atributos.Add(Contenedor["NUMERIC_SCALE"].ToString());
+                atributos.Add(Contenedor["Primaria"].ToString());
+                atributos.Add(Contenedor["Foranea"].ToString());
+                atributos.Add(Contenedor["CHECK_CLAUSE"].ToString());
+
+                tuplas.Add(atributos);
+                atributos = new ArrayList();
+
+            }//CONTENEDOR READ
+
+            Contenedor.Close();//Cierra contenedor con los datos seleccionados
+
+
+            return tuplas;//devuelve los datos necesarios
+        }
+
         //---------------- Validacion de dominio----------------
         public ArrayList Validar_dominio(String BD, String tabla, String tabla2)
         {
