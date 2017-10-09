@@ -106,7 +106,7 @@
             this.lblAlgebraLineal.AutoSize = true;
             this.lblAlgebraLineal.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlgebraLineal.ForeColor = System.Drawing.Color.White;
-            this.lblAlgebraLineal.Location = new System.Drawing.Point(150, 67);
+            this.lblAlgebraLineal.Location = new System.Drawing.Point(181, 67);
             this.lblAlgebraLineal.Name = "lblAlgebraLineal";
             this.lblAlgebraLineal.Size = new System.Drawing.Size(94, 26);
             this.lblAlgebraLineal.TabIndex = 6;
@@ -119,16 +119,16 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(132, 26);
+            this.label2.Size = new System.Drawing.Size(166, 26);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Algebra lineal:";
+            this.label2.Text = "Algebra relacional:";
             // 
             // lblSQL
             // 
             this.lblSQL.AutoSize = true;
             this.lblSQL.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSQL.ForeColor = System.Drawing.Color.White;
-            this.lblSQL.Location = new System.Drawing.Point(11, 0);
+            this.lblSQL.Location = new System.Drawing.Point(13, 0);
             this.lblSQL.Name = "lblSQL";
             this.lblSQL.Size = new System.Drawing.Size(94, 26);
             this.lblSQL.TabIndex = 6;
@@ -149,9 +149,9 @@
             // 
             this.pnSQL.AutoScroll = true;
             this.pnSQL.Controls.Add(this.lblSQL);
-            this.pnSQL.Location = new System.Drawing.Point(139, 96);
+            this.pnSQL.Location = new System.Drawing.Point(71, 96);
             this.pnSQL.Name = "pnSQL";
-            this.pnSQL.Size = new System.Drawing.Size(872, 75);
+            this.pnSQL.Size = new System.Drawing.Size(940, 75);
             this.pnSQL.TabIndex = 11;
             // 
             // frmTablaResultado

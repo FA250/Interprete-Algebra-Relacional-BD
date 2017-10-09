@@ -121,7 +121,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\Manual.pdf" />
+    <None Include="Resources\manual_de_usuario_interpretador_álgebra_relacional.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
