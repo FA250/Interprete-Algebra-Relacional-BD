@@ -87,6 +87,7 @@ namespace InterpreteAlgebraRelacionalSQL
                             BDActual = txtBDNueva.Text;
                             txtBDNueva.Text = "";
 
+                            MD.Crear_view_diccionario(BDActual);
                             //Abre la ventana de consultas y esconde la ventana de ingreso
                             Form Consultas = new frmConsultas(this, BDActual);
                             Consultas.Show();
