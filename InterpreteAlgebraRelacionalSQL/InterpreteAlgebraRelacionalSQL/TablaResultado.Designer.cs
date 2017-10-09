@@ -37,7 +37,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblSQL = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.pnSQL = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).BeginInit();
+            this.pnSQL.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvResultado
@@ -45,10 +47,10 @@
             this.dgvResultado.AllowUserToAddRows = false;
             this.dgvResultado.AllowUserToDeleteRows = false;
             this.dgvResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResultado.Location = new System.Drawing.Point(12, 127);
+            this.dgvResultado.Location = new System.Drawing.Point(12, 177);
             this.dgvResultado.Name = "dgvResultado";
             this.dgvResultado.ReadOnly = true;
-            this.dgvResultado.Size = new System.Drawing.Size(999, 500);
+            this.dgvResultado.Size = new System.Drawing.Size(999, 499);
             this.dgvResultado.TabIndex = 0;
             // 
             // label1
@@ -123,7 +125,7 @@
             this.lblSQL.AutoSize = true;
             this.lblSQL.Font = new System.Drawing.Font("Palatino Linotype", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSQL.ForeColor = System.Drawing.Color.White;
-            this.lblSQL.Location = new System.Drawing.Point(150, 93);
+            this.lblSQL.Location = new System.Drawing.Point(11, 0);
             this.lblSQL.Name = "lblSQL";
             this.lblSQL.Size = new System.Drawing.Size(94, 26);
             this.lblSQL.TabIndex = 6;
@@ -140,16 +142,25 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "SQL:";
             // 
+            // pnSQL
+            // 
+            this.pnSQL.AutoScroll = true;
+            this.pnSQL.Controls.Add(this.lblSQL);
+            this.pnSQL.Location = new System.Drawing.Point(139, 96);
+            this.pnSQL.Name = "pnSQL";
+            this.pnSQL.Size = new System.Drawing.Size(872, 75);
+            this.pnSQL.TabIndex = 11;
+            // 
             // frmTablaResultado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(82)))), ((int)(((byte)(151)))));
-            this.ClientSize = new System.Drawing.Size(1023, 639);
+            this.ClientSize = new System.Drawing.Size(1023, 688);
+            this.Controls.Add(this.pnSQL);
             this.Controls.Add(this.btnGuardarTabla);
             this.Controls.Add(this.txtNombreTabla);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lblSQL);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblAlgebraLineal);
             this.Controls.Add(this.lblTabla);
@@ -160,6 +171,8 @@
             this.Text = "TablaResultado";
             this.Load += new System.EventHandler(this.frmTablaResultado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultado)).EndInit();
+            this.pnSQL.ResumeLayout(false);
+            this.pnSQL.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,5 +189,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblSQL;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pnSQL;
     }
 }
