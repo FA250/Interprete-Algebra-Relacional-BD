@@ -68,9 +68,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(342, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 36);
+            this.label1.Size = new System.Drawing.Size(112, 36);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Atibutos:";
+            this.label1.Text = "Atibuto:";
             // 
             // frmReferenciaCruzada
             // 
