@@ -24,7 +24,6 @@ namespace InterpreteAlgebraRelacionalSQL
 
         private void btnIngreso_Click(object sender, EventArgs e)
         {
-
             if (BDActual == "Ninguna")
             {
                 if (txtBDNueva.Text.Trim() == "")

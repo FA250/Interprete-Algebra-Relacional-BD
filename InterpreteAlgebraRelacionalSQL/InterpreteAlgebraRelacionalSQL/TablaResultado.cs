@@ -20,14 +20,16 @@ namespace InterpreteAlgebraRelacionalSQL
         String BDActual;
         String algebraLineal;
         String SQLOp;
+        String SQLGuardarTabla;
         ClaseMD MD = new ClaseMD();
-        public frmTablaResultado(String BD,ArrayList columnasTabla,ArrayList tuplasTabla,String algebraLinealOP,String OperacionSQL)
+        public frmTablaResultado(String BD,ArrayList columnasTabla,ArrayList tuplasTabla,String algebraLinealOP,String OperacionSQL, String SQLGuardarTablaTemp)
         {
             columnas = columnasTabla;
             tuplas = tuplasTabla;
             BDActual = BD;
             algebraLineal = algebraLinealOP;
             SQLOp = OperacionSQL;
+            SQLGuardarTabla = SQLGuardarTablaTemp;
             InitializeComponent();
         }
 
@@ -114,7 +116,7 @@ namespace InterpreteAlgebraRelacionalSQL
 
                     if (result == DialogResult.Yes)
                     {
-                        String error=MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, lblSQL.Text);
+                        String error=MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, SQLGuardarTabla);
                         if (error == null)
                         {
                             MessageBox.Show("No se pudo guardar la tabla " + txtNombreTabla.Text, "Error");
@@ -136,7 +138,7 @@ namespace InterpreteAlgebraRelacionalSQL
                 }
                 else
                 {
-                    String error=MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, lblSQL.Text);
+                    String error = MD.Crear_tabla_temp(BDActual, txtNombreTabla.Text, SQLGuardarTabla);
                     if (error == null)
                     {
                         MessageBox.Show("No se pudo guardar la tabla "+txtNombreTabla.Text, "Error");
